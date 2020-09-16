@@ -1,0 +1,50 @@
+{
+  "name": "@lafe/web",
+  "version": "1.0.0",
+  "author": "André 'Dezzy' <@andredezzy>",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && echo '/* /index.html 200' | cat >build/_redirects",
+    "test": "react-scripts test --passWithNoTests",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/pages/**/*.tsx",
+      "src/components/**/*.tsx",
+      "src/hooks/*.tsx",
+      "!src/hooks/index.tsx"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "history": "^5.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-ga": "^3.1.2",
+    "react-helmet": "^6.0.0",
+    "react-router-dom": "^6.0.0-beta.0",
+    "react-scripts": "3.4.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/react-hooks": "^3.4.1",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-helmet": "^5.0.15"
+  }
+}
