@@ -83,6 +83,7 @@
             "internal"
           ],
           "/^@config/",
+          "/^@utils/",
           "/^@/",
           "/^~/",
           [
@@ -105,7 +106,7 @@
           "PascalCase"
         ],
         "custom": {
-          "regex": "^[A-Z]",
+          "regex": "^I[A-Z]",
           "match": true
         }
       }

@@ -14,7 +14,9 @@ const App: React.FC = () => {
         <title>Lafe</title>
       </Helmet>
 
-      <h1>App</h1>
+      <Router>
+        <h1>App</h1>
+      </Router>
     </>
   );
 };
