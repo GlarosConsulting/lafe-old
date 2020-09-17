@@ -11,10 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PaymeTrade/kore.git"
+    "url": "git+https://github.com/GlarosConsulting/lafe.git"
   },
   "bugs": {
-    "url": "https://github.com/PaymeTrade/kore/issues"
+    "url": "https://github.com/GlarosConsulting/lafe/issues"
   },
   "workspaces": {
     "packages": [

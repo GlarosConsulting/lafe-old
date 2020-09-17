@@ -23,6 +23,9 @@
       ],
       "@shared/*": [
         "shared/*"
+      ],
+      "@utils/*": [
+        "utils/*"
       ]
     }
   },
