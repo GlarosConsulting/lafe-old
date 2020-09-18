@@ -1,4 +1,5 @@
 import { Row, Workbook } from 'exceljs';
+import fs from 'fs';
 import path from 'path';
 import { inject, injectable } from 'tsyringe';
 
@@ -8,7 +9,9 @@ import parseDate from '@utils/parseDate';
 import parsePrice from '@utils/parsePrice';
 
 import Bill from '@modules/bills/infra/typeorm/entities/Bill';
+import IBillsRepository from '@modules/bills/repositories/IBillsRepository';
 import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   importFilename: string;
@@ -31,6 +34,9 @@ const ROW_WITH_CONTENT_CELL_IDENTIFIER = 2;
 @injectable()
 export default class ImportBillsService {
   constructor(
+    @inject('BillsRepository')
+    private billsRepository: IBillsRepository,
+
     @inject('StorageProvider')
     private storageProvider: IStorageProvider,
   ) {}
@@ -38,10 +44,22 @@ export default class ImportBillsService {
   public async execute({ importFilename }: IRequest): Promise<Bill[]> {
     const importFilePath = path.join(uploadConfig.tmpFolder, importFilename);
 
+    if (!importFilename.length) {
+      throw new AppError('Invalid import filename.');
+    }
+
+    const checkFileExists = fs.existsSync(importFilePath);
+
+    if (!checkFileExists) {
+      throw new AppError('It was not able to find file to import.', 500);
+    }
+
     const workbook = new Workbook();
     const readWorkbook = await workbook.xlsx.readFile(importFilePath);
 
-    readWorkbook.worksheets.forEach(worksheet => {
+    const bills: Bill[] = [];
+
+    for (const worksheet of readWorkbook.worksheets) {
       const rowsWithContent: Row[] = [];
 
       for (let i = START_ROW_WITH_CONTENT; i !== -1; i++) {
@@ -90,11 +108,13 @@ export default class ImportBillsService {
         } as IBillExcel;
       });
 
-      console.log(billsFromExcel);
-    });
+      const createdBills = await this.billsRepository.createAll(billsFromExcel);
 
-    this.storageProvider.saveFile(importFilename);
+      bills.push(...createdBills);
+    }
 
-    return [];
+    await this.storageProvider.saveFile(importFilename);
+
+    return bills;
   }
 }
