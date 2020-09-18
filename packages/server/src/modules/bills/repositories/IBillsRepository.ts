@@ -1,5 +1,7 @@
+import ICreateBillDTO from '@modules/bills/dtos/ICreateBillDTO';
+
 import Bill from '../infra/typeorm/entities/Bill';
 
 export default interface IBillsRepository {
-  create(): Promise<Bill>;
+  createAll(data: ICreateBillDTO[]): Promise<Bill[]>;
 }
