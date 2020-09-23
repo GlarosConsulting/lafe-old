@@ -1,0 +1,22 @@
+export default interface ICreatePhysicalComparativeRepositoryDTO {
+  description: string;
+  und: string;
+  duration: number;
+  start: Date;
+  end: Date;
+  percentage_weight: number;
+  status_in_days: number;
+  quantities: {
+    planned: number;
+    foreseen: number;
+    measured: number;
+  };
+  percentage: {
+    foreseen: number;
+    measured: number;
+  };
+  advance_percentage: {
+    foreseen: number;
+    measured: number;
+  };
+}
