@@ -41,26 +41,38 @@ describe('ImportPhysicalsComparatives', () => {
       'createAll',
     );
 
-    const physicalsComparatives = await importPhysicalsComparatives.execute({
+    const response = await importPhysicalsComparatives.execute({
       importFilename: TESTS_IMPORT_FILENAME,
     });
 
     expect(createAll).toHaveBeenCalled();
 
-    expect(physicalsComparatives).toContainEqual(
-      expect.objectContaining({
-        description: expect.any(String),
-        und: expect.any(String),
-        duration: expect.any(Number),
-        start: expect.any(Date),
-        end: expect.any(Date),
-        percentage_weight: expect.any(Number),
-        status_in_days: expect.any(Number),
-        quantities: expect.any(String),
-        percentage: expect.any(String),
-        advance_percentage: expect.any(String),
-      }),
-    );
+    expect(response).toEqual({
+      header: {
+        id: expect.any(String),
+        spreadsheet_name: TESTS_IMPORT_FILENAME,
+        construction: expect.any(String),
+        constructive_unity: expect.any(String),
+        measurement: expect.any(String),
+        construction_start: expect.any(Date),
+        construction_end: expect.any(Date),
+      },
+      items: expect.arrayContaining([
+        {
+          id: expect.any(String),
+          description: expect.any(String),
+          und: expect.any(String),
+          duration: expect.any(Number),
+          start: expect.any(Date),
+          end: expect.any(Date),
+          percentage_weight: expect.any(Number),
+          status_in_days: expect.any(Number),
+          quantities: expect.any(String),
+          percentage: expect.any(String),
+          advance_percentage: expect.any(String),
+        },
+      ]),
+    });
   });
 
   it('should not be able to import physicals comparatives with invalid import filename', async () => {

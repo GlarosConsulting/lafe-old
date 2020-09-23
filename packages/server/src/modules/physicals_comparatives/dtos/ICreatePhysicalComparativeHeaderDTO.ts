@@ -1,4 +1,4 @@
-export default interface ICreatePhysicalComparativeRepositoryDTO {
+export default interface ICreatePhysicalComparativeHeaderDTO {
   spreadsheet_name: string;
   construction: string;
   constructive_unity: string;

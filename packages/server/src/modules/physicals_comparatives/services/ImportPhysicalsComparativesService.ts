@@ -7,6 +7,7 @@ import uploadConfig from '@config/upload';
 
 import parseDate from '@utils/parseDate';
 
+import PhysicalComparativeHeader from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeHeader';
 import PhysicalComparativeItem from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeItem';
 import IPhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeHeadersRepository';
 import IPhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeItemsRepository';
@@ -17,7 +18,16 @@ interface IRequest {
   importFilename: string;
 }
 
-interface IPhysicalComparativeExcel {
+interface IPhysicalComparativeHeaderExcel {
+  spreadsheet_name: string;
+  construction: string;
+  constructive_unity: string;
+  measurement: string;
+  construction_start: Date;
+  construction_end: Date;
+}
+
+interface IPhysicalComparativeItemExcel {
   spreadsheet_name: string;
   description: string;
   und: string;
@@ -41,6 +51,11 @@ interface IPhysicalComparativeExcel {
   };
 }
 
+interface IResponse {
+  header: PhysicalComparativeHeader;
+  items: PhysicalComparativeItem[];
+}
+
 const START_ROW_WITH_CONTENT = 11;
 const ROW_WITH_CONTENT_CELL_IDENTIFIER = 2;
 
@@ -57,9 +72,7 @@ export default class ImportPhysicalsComparativesService {
     private storageProvider: IStorageProvider,
   ) {}
 
-  public async execute({
-    importFilename,
-  }: IRequest): Promise<PhysicalComparativeItem[]> {
+  public async execute({ importFilename }: IRequest): Promise<IResponse> {
     const importFilePath = path.join(uploadConfig.tmpFolder, importFilename);
 
     if (!importFilename.length) {
@@ -86,26 +99,6 @@ export default class ImportPhysicalsComparativesService {
       throw new AppError('Invalid spreadsheet.');
     }
 
-    // TODO: extract header data and persist to database
-
-    const rowsWithContent: Row[] = [];
-
-    for (let i = START_ROW_WITH_CONTENT; i !== -1; i++) {
-      const row = worksheet.getRow(i);
-      const cell = row.getCell(ROW_WITH_CONTENT_CELL_IDENTIFIER);
-
-      if (!cell || !cell.value) {
-        i = -1;
-        break;
-      }
-
-      if (String(cell.value).trim().startsWith('-')) {
-        continue;
-      }
-
-      rowsWithContent.push(row);
-    }
-
     const getCellValue = (
       row: Row,
       cellIndex: number | string,
@@ -119,8 +112,51 @@ export default class ImportPhysicalsComparativesService {
       return String(value).trim();
     };
 
-    const physicalsComparativeFromExcel = rowsWithContent.map<
-      IPhysicalComparativeExcel
+    const getHeaderData = (): IPhysicalComparativeHeaderExcel => {
+      const construction = getCellValue(worksheet.getRow(5), 3);
+      const constructive_unity = getCellValue(worksheet.getRow(6), 3);
+      const measurement = getCellValue(worksheet.getRow(6), 3);
+      const construction_start = getCellValue(worksheet.getRow(5), 17);
+      const construction_end = getCellValue(worksheet.getRow(6), 17);
+
+      return {
+        spreadsheet_name: importFilename,
+        construction,
+        constructive_unity,
+        measurement,
+        construction_start: parseDate(construction_start),
+        construction_end: parseDate(construction_end),
+      } as IPhysicalComparativeHeaderExcel;
+    };
+
+    const headerData = getHeaderData();
+
+    const physicalComparativeHeader = await this.physicalComparativeHeadersRepository.create(
+      headerData,
+    );
+
+    const groupingRowsWithContent: Row[] = [];
+    const itemsRowsWithContent: Row[] = [];
+
+    for (let i = START_ROW_WITH_CONTENT; i !== -1; i++) {
+      const row = worksheet.getRow(i);
+      const cell = row.getCell(ROW_WITH_CONTENT_CELL_IDENTIFIER);
+
+      if (!cell || !cell.value) {
+        i = -1;
+        break;
+      }
+
+      if (String(cell.value).trim().startsWith('-')) {
+        groupingRowsWithContent.push(row);
+        continue;
+      }
+
+      itemsRowsWithContent.push(row);
+    }
+
+    const physicalsComparativeFromExcel = itemsRowsWithContent.map<
+      IPhysicalComparativeItemExcel
     >(row => {
       const description = getCellValue(row, 2);
       const und = getCellValue(row, 8);
@@ -161,15 +197,18 @@ export default class ImportPhysicalsComparativesService {
           foreseen: Number(advance_percentage_foreseen),
           measured: Number(advance_percentage_measured),
         },
-      } as IPhysicalComparativeExcel;
+      } as IPhysicalComparativeItemExcel;
     });
 
-    const createdPhysicalsComparatives = await this.physicalComparativeItemsRepository.createAll(
+    const physicalComparativeItems = await this.physicalComparativeItemsRepository.createAll(
       physicalsComparativeFromExcel,
     );
 
     await this.storageProvider.saveFile(importFilename);
 
-    return createdPhysicalsComparatives;
+    return {
+      header: physicalComparativeHeader,
+      items: physicalComparativeItems,
+    };
   }
 }
