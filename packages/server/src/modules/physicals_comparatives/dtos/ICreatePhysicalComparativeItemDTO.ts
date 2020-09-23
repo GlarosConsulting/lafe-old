@@ -1,4 +1,4 @@
-export default interface ICreatePhysicalComparativeRepositoryDTO {
+export default interface ICreatePhysicalComparativeItemDTO {
   description: string;
   und: string;
   duration: number;
