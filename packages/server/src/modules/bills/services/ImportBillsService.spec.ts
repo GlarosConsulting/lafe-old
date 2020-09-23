@@ -13,7 +13,7 @@ let fakeBillsRepository: FakeBillsRepository;
 let fakeStorageProvider: FakeStorageProvider;
 let importBills: ImportBillsService;
 
-describe('ImportBillsService', () => {
+describe('ImportBills', () => {
   beforeEach(() => {
     fakeBillsRepository = new FakeBillsRepository();
     fakeStorageProvider = new FakeStorageProvider();
