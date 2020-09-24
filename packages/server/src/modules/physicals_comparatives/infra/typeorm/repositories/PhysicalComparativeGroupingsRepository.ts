@@ -14,6 +14,7 @@ class PhysicalComparativeGroupingsRepository
   }
 
   public async create({
+    header_id,
     title,
     duration,
     start_date,
@@ -22,6 +23,7 @@ class PhysicalComparativeGroupingsRepository
     PhysicalComparativeGrouping
   > {
     const physicalComparativeGrouping = this.ormRepository.create({
+      header_id,
       title,
       duration,
       start_date,

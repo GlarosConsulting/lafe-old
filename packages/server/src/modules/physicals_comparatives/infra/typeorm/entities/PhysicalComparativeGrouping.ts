@@ -12,6 +12,9 @@ export default class PhysicalComparativeGrouping {
   id: string;
 
   @Column()
+  header_id: string;
+
+  @Column()
   title: string;
 
   @Column('integer')

@@ -11,52 +11,14 @@ import uploadConfig from '@config/upload';
 import parseDate from '@utils/parseDate';
 
 import ICreatePhysicalComparativeGroupingDTO from '@modules/physicals_comparatives/dtos/ICreatePhysicalComparativeGroupingDTO';
+import ICreatePhysicalComparativeHeaderDTO from '@modules/physicals_comparatives/dtos/ICreatePhysicalComparativeHeaderDTO';
+import ICreatePhysicalComparativeItemDTO from '@modules/physicals_comparatives/dtos/ICreatePhysicalComparativeItemDTO';
 import PhysicalComparativeGrouping from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeGrouping';
 import PhysicalComparativeHeader from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeHeader';
 import PhysicalComparativeItem from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeItem';
 import IPhysicalComparativeGroupingsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeGroupingsRepository';
 import IPhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeHeadersRepository';
 import IPhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeItemsRepository';
-
-interface IPhysicalComparativeHeaderExcel {
-  spreadsheet_name: string;
-  construction: string;
-  constructive_unity: string;
-  measurement: string;
-  construction_start_date: Date;
-  construction_end_date: Date;
-}
-
-interface IPhysicalComparativeGroupingExcel {
-  description: string;
-  duration: number;
-  start_date: Date;
-  end_date: Date;
-}
-
-interface IPhysicalComparativeItemExcel {
-  spreadsheet_name: string;
-  description: string;
-  und: string;
-  duration: number;
-  start_date: Date;
-  end_date: Date;
-  percentage_weight: number;
-  status_in_days: number;
-  quantities: {
-    planned: number;
-    foreseen: number;
-    measured: number;
-  };
-  percentage: {
-    foreseen: number;
-    measured: number;
-  };
-  advance_percentage: {
-    foreseen: number;
-    measured: number;
-  };
-}
 
 interface IPhysicalComparativeComplement {
   grouping: PhysicalComparativeGrouping;
@@ -131,7 +93,7 @@ export default class ImportPhysicalsComparativesService {
       return String(value).trim();
     };
 
-    const getHeaderData = (): IPhysicalComparativeHeaderExcel => {
+    const getHeaderData = (): ICreatePhysicalComparativeHeaderDTO => {
       const construction = getCellValue(worksheet.getRow(5), 3);
       const constructive_unity = getCellValue(worksheet.getRow(6), 3);
       const measurement = getCellValue(worksheet.getRow(6), 3);
@@ -145,7 +107,7 @@ export default class ImportPhysicalsComparativesService {
         measurement,
         construction_start_date: parseDate(construction_start_date),
         construction_end_date: parseDate(construction_end_date),
-      } as IPhysicalComparativeHeaderExcel;
+      } as ICreatePhysicalComparativeHeaderDTO;
     };
 
     const headerData = getHeaderData();
@@ -195,6 +157,7 @@ export default class ImportPhysicalsComparativesService {
         const end_date = getCellValue(row, 11);
 
         return this.physicalComparativeGroupingsRepository.create({
+          header_id: physicalComparativeHeader.id,
           title,
           duration: Number(duration),
           start_date: parseDate(start_date),
@@ -202,10 +165,12 @@ export default class ImportPhysicalsComparativesService {
         } as ICreatePhysicalComparativeGroupingDTO);
       };
 
-      const grouping = await createGrouping(complement.grouping);
+      const physicalComparativeGrouping = await createGrouping(
+        complement.grouping,
+      );
 
       const physicalsComparativeFromExcel = complement.items.map<
-        IPhysicalComparativeItemExcel
+        ICreatePhysicalComparativeItemDTO
       >(row => {
         const description = getCellValue(row, 2);
         const und = getCellValue(row, 8);
@@ -226,6 +191,7 @@ export default class ImportPhysicalsComparativesService {
         const advance_percentage_measured = getCellValue(row, 22);
 
         return {
+          grouping_id: physicalComparativeGrouping.id,
           description,
           und,
           duration: Number(duration),
@@ -246,7 +212,7 @@ export default class ImportPhysicalsComparativesService {
             foreseen: Number(advance_percentage_foreseen || 0),
             measured: Number(advance_percentage_measured || 0),
           },
-        } as IPhysicalComparativeItemExcel;
+        } as ICreatePhysicalComparativeItemDTO;
       });
 
       const physicalComparativeItems = await this.physicalComparativeItemsRepository.createAll(
@@ -254,7 +220,7 @@ export default class ImportPhysicalsComparativesService {
       );
 
       physicalComparativeComplements.push({
-        grouping,
+        grouping: physicalComparativeGrouping,
         items: physicalComparativeItems,
       });
     }

@@ -15,6 +15,10 @@ export default class CreatePhysicalComparativeGroupings1600902913124
             default: 'uuid_generate_v4()',
           },
           {
+            name: 'header_id',
+            type: 'uuid',
+          },
+          {
             name: 'title',
             type: 'varchar',
           },
@@ -39,6 +43,16 @@ export default class CreatePhysicalComparativeGroupings1600902913124
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
+          },
+        ],
+        foreignKeys: [
+          {
+            name: 'PhysicalComparativeGroupingHeader',
+            columnNames: ['header_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'physical_comparative_headers',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
           },
         ],
       }),

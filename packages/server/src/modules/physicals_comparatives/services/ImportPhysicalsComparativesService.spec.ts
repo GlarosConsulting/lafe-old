@@ -66,6 +66,7 @@ describe('ImportPhysicalsComparatives', () => {
         expect.objectContaining({
           grouping: {
             id: expect.any(String),
+            header_id: expect.any(String),
             title: expect.any(String),
             duration: expect.any(Number),
             start_date: expect.any(Date),
@@ -74,6 +75,7 @@ describe('ImportPhysicalsComparatives', () => {
           items: expect.arrayContaining([
             {
               id: expect.any(String),
+              grouping_id: expect.any(String),
               description: expect.any(String),
               und: expect.any(String),
               duration: expect.any(Number),
