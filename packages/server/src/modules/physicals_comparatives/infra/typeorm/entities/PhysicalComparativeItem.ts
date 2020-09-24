@@ -12,6 +12,9 @@ export default class PhysicalComparativeItem {
   id: string;
 
   @Column()
+  grouping_id: string;
+
+  @Column()
   description: string;
 
   @Column()

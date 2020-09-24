@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreatePhysicalComparativeItems1600882968337
+export default class CreatePhysicalComparativeItems1600902913124
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -15,12 +15,8 @@ export default class CreatePhysicalComparativeItems1600882968337
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'header_id',
-            type: 'varchar',
-          },
-          {
             name: 'grouping_id',
-            type: 'varchar',
+            type: 'uuid',
           },
           {
             name: 'description',
@@ -75,14 +71,6 @@ export default class CreatePhysicalComparativeItems1600882968337
           },
         ],
         foreignKeys: [
-          {
-            name: 'PhysicalComparativeItemHeader',
-            columnNames: ['header_id'],
-            referencedColumnNames: ['id'],
-            referencedTableName: 'physical_comparative_headers',
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
           {
             name: 'PhysicalComparativeItemGrouping',
             columnNames: ['grouping_id'],

@@ -1,4 +1,5 @@
 export default interface ICreatePhysicalComparativeItemDTO {
+  grouping_id: string;
   description: string;
   und: string;
   duration: number;

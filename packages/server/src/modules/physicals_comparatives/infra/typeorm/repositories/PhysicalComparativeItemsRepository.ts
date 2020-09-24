@@ -18,6 +18,7 @@ class PhysicalComparativeItemsRepository
   ): Promise<PhysicalComparativeItem[]> {
     const physicalComparativeItems = data.map(physicalComparativeData => {
       const {
+        grouping_id,
         description,
         und,
         duration,
@@ -31,6 +32,7 @@ class PhysicalComparativeItemsRepository
       } = physicalComparativeData;
 
       return this.ormRepository.create({
+        grouping_id,
         description,
         und,
         duration,
