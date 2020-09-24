@@ -18,16 +18,16 @@ class PhysicalComparativeHeadersRepository
     construction,
     constructive_unity,
     measurement,
-    construction_start,
-    construction_end,
+    construction_start_date,
+    construction_end_date,
   }: ICreatePhysicalComparativeHeaderDTO): Promise<PhysicalComparativeHeader> {
     const physicalComparativeHeader = this.ormRepository.create({
       spreadsheet_name,
       construction,
       constructive_unity,
       measurement,
-      construction_start,
-      construction_end,
+      construction_start_date,
+      construction_end_date,
     });
 
     await this.ormRepository.save(physicalComparativeHeader);

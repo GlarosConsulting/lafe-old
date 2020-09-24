@@ -3,28 +3,35 @@ import fs from 'fs';
 import path from 'path';
 import { inject, injectable } from 'tsyringe';
 
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import AppError from '@shared/errors/AppError';
+
 import uploadConfig from '@config/upload';
 
 import parseDate from '@utils/parseDate';
 
+import ICreatePhysicalComparativeGroupingDTO from '@modules/physicals_comparatives/dtos/ICreatePhysicalComparativeGroupingDTO';
+import PhysicalComparativeGrouping from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeGrouping';
 import PhysicalComparativeHeader from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeHeader';
 import PhysicalComparativeItem from '@modules/physicals_comparatives/infra/typeorm/entities/PhysicalComparativeItem';
+import IPhysicalComparativeGroupingsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeGroupingsRepository';
 import IPhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeHeadersRepository';
 import IPhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeItemsRepository';
-import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
-import AppError from '@shared/errors/AppError';
-
-interface IRequest {
-  importFilename: string;
-}
 
 interface IPhysicalComparativeHeaderExcel {
   spreadsheet_name: string;
   construction: string;
   constructive_unity: string;
   measurement: string;
-  construction_start: Date;
-  construction_end: Date;
+  construction_start_date: Date;
+  construction_end_date: Date;
+}
+
+interface IPhysicalComparativeGroupingExcel {
+  description: string;
+  duration: number;
+  start_date: Date;
+  end_date: Date;
 }
 
 interface IPhysicalComparativeItemExcel {
@@ -32,8 +39,8 @@ interface IPhysicalComparativeItemExcel {
   description: string;
   und: string;
   duration: number;
-  start: Date;
-  end: Date;
+  start_date: Date;
+  end_date: Date;
   percentage_weight: number;
   status_in_days: number;
   quantities: {
@@ -51,9 +58,18 @@ interface IPhysicalComparativeItemExcel {
   };
 }
 
+interface IPhysicalComparativeComplement {
+  grouping: PhysicalComparativeGrouping;
+  items: PhysicalComparativeItem[];
+}
+
+interface IRequest {
+  importFilename: string;
+}
+
 interface IResponse {
   header: PhysicalComparativeHeader;
-  items: PhysicalComparativeItem[];
+  complements: IPhysicalComparativeComplement[];
 }
 
 const START_ROW_WITH_CONTENT = 11;
@@ -64,6 +80,9 @@ export default class ImportPhysicalsComparativesService {
   constructor(
     @inject('PhysicalComparativeHeadersRepository')
     private physicalComparativeHeadersRepository: IPhysicalComparativeHeadersRepository,
+
+    @inject('PhysicalComparativeGroupingsRepository')
+    private physicalComparativeGroupingsRepository: IPhysicalComparativeGroupingsRepository,
 
     @inject('PhysicalComparativeItemsRepository')
     private physicalComparativeItemsRepository: IPhysicalComparativeItemsRepository,
@@ -116,16 +135,16 @@ export default class ImportPhysicalsComparativesService {
       const construction = getCellValue(worksheet.getRow(5), 3);
       const constructive_unity = getCellValue(worksheet.getRow(6), 3);
       const measurement = getCellValue(worksheet.getRow(6), 3);
-      const construction_start = getCellValue(worksheet.getRow(5), 17);
-      const construction_end = getCellValue(worksheet.getRow(6), 17);
+      const construction_start_date = getCellValue(worksheet.getRow(5), 17);
+      const construction_end_date = getCellValue(worksheet.getRow(6), 17);
 
       return {
         spreadsheet_name: importFilename,
         construction,
         constructive_unity,
         measurement,
-        construction_start: parseDate(construction_start),
-        construction_end: parseDate(construction_end),
+        construction_start_date: parseDate(construction_start_date),
+        construction_end_date: parseDate(construction_end_date),
       } as IPhysicalComparativeHeaderExcel;
     };
 
@@ -135,8 +154,11 @@ export default class ImportPhysicalsComparativesService {
       headerData,
     );
 
-    const groupingRowsWithContent: Row[] = [];
-    const itemsRowsWithContent: Row[] = [];
+    let complementIndex = -1;
+    const complements: Array<{
+      grouping: Row;
+      items: Row[];
+    }> = [];
 
     for (let i = START_ROW_WITH_CONTENT; i !== -1; i++) {
       const row = worksheet.getRow(i);
@@ -148,67 +170,100 @@ export default class ImportPhysicalsComparativesService {
       }
 
       if (String(cell.value).trim().startsWith('-')) {
-        groupingRowsWithContent.push(row);
+        complementIndex++;
+
+        complements[complementIndex] = {
+          grouping: row,
+          items: [],
+        };
+
         continue;
       }
 
-      itemsRowsWithContent.push(row);
+      complements[complementIndex].items.push(row);
     }
 
-    const physicalsComparativeFromExcel = itemsRowsWithContent.map<
-      IPhysicalComparativeItemExcel
-    >(row => {
-      const description = getCellValue(row, 2);
-      const und = getCellValue(row, 8);
-      const duration = getCellValue(row, 9);
-      const start = getCellValue(row, 10);
-      const end = getCellValue(row, 11);
-      const percentage_weight = getCellValue(row, 12);
-      const status_in_days = getCellValue(row, 20);
+    const physicalComparativeComplements: IPhysicalComparativeComplement[] = [];
 
-      const quantities_planned = getCellValue(row, 13);
-      const quantities_foreseen = getCellValue(row, 14);
-      const quantities_measured = getCellValue(row, 15);
+    for (const complement of complements) {
+      const createGrouping = (
+        row: Row,
+      ): Promise<PhysicalComparativeGrouping> => {
+        const title = getCellValue(row, 2);
+        const duration = getCellValue(row, 9);
+        const start_date = getCellValue(row, 10);
+        const end_date = getCellValue(row, 11);
 
-      const percentage_foreseen = getCellValue(row, 16);
-      const percentage_measured = getCellValue(row, 17);
+        return this.physicalComparativeGroupingsRepository.create({
+          title,
+          duration: Number(duration),
+          start_date: parseDate(start_date),
+          end_date: parseDate(end_date),
+        } as ICreatePhysicalComparativeGroupingDTO);
+      };
 
-      const advance_percentage_foreseen = getCellValue(row, 18);
-      const advance_percentage_measured = getCellValue(row, 19);
+      const grouping = await createGrouping(complement.grouping);
 
-      return {
-        description,
-        und,
-        duration: Number(duration),
-        start: parseDate(start),
-        end: parseDate(end),
-        percentage_weight: Number(percentage_weight),
-        status_in_days: Number(status_in_days),
-        quantities: {
-          planned: Number(quantities_planned),
-          foreseen: Number(quantities_foreseen),
-          measured: Number(quantities_measured),
-        },
-        percentage: {
-          foreseen: Number(percentage_foreseen),
-          measured: Number(percentage_measured),
-        },
-        advance_percentage: {
-          foreseen: Number(advance_percentage_foreseen),
-          measured: Number(advance_percentage_measured),
-        },
-      } as IPhysicalComparativeItemExcel;
-    });
+      const physicalsComparativeFromExcel = complement.items.map<
+        IPhysicalComparativeItemExcel
+      >(row => {
+        const description = getCellValue(row, 2);
+        const und = getCellValue(row, 8);
+        const duration = getCellValue(row, 9);
+        const start_date = getCellValue(row, 10);
+        const end_date = getCellValue(row, 11);
+        const percentage_weight = getCellValue(row, 14);
+        const status_in_days = getCellValue(row, 23);
 
-    const physicalComparativeItems = await this.physicalComparativeItemsRepository.createAll(
-      physicalsComparativeFromExcel,
-    );
+        const quantities_planned = getCellValue(row, 16);
+        const quantities_foreseen = getCellValue(row, 17);
+        const quantities_measured = getCellValue(row, 18);
+
+        const percentage_foreseen = getCellValue(row, 19);
+        const percentage_measured = getCellValue(row, 20);
+
+        const advance_percentage_foreseen = getCellValue(row, 21);
+        const advance_percentage_measured = getCellValue(row, 22);
+
+        return {
+          description,
+          und,
+          duration: Number(duration),
+          start_date: parseDate(start_date),
+          end_date: parseDate(end_date),
+          percentage_weight: Number(percentage_weight || 0),
+          status_in_days: Number(status_in_days || 0),
+          quantities: {
+            planned: Number(quantities_planned || 0),
+            foreseen: Number(quantities_foreseen || 0),
+            measured: Number(quantities_measured || 0),
+          },
+          percentage: {
+            foreseen: Number(percentage_foreseen || 0),
+            measured: Number(percentage_measured || 0),
+          },
+          advance_percentage: {
+            foreseen: Number(advance_percentage_foreseen || 0),
+            measured: Number(advance_percentage_measured || 0),
+          },
+        } as IPhysicalComparativeItemExcel;
+      });
+
+      const physicalComparativeItems = await this.physicalComparativeItemsRepository.createAll(
+        physicalsComparativeFromExcel,
+      );
+
+      physicalComparativeComplements.push({
+        grouping,
+        items: physicalComparativeItems,
+      });
+    }
 
     await this.storageProvider.saveFile(importFilename);
 
     return {
       header: physicalComparativeHeader,
-      items: physicalComparativeItems,
+      complements: physicalComparativeComplements,
     };
   }
 }

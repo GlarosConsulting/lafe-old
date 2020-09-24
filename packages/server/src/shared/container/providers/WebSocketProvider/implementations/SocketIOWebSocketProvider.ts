@@ -2,10 +2,10 @@ import { Server } from 'http';
 import socketio from 'socket.io';
 import { injectable, inject } from 'tsyringe';
 
-import webSocketConfig from '@config/websocket';
-
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import IEmitDTO from '@shared/container/providers/WebSocketProvider/dtos/IEmitDTO';
+
+import webSocketConfig from '@config/websocket';
 
 import IConnections from '../models/IConnections';
 import IWebSocketProvider from '../models/IWebSocketProvider';

@@ -12,9 +12,9 @@ import 'express-async-errors';
 import '@shared/infra/typeorm';
 import '@shared/container';
 
-import uploadConfig from '@config/upload';
-
 import AppError from '@shared/errors/AppError';
+
+import uploadConfig from '@config/upload';
 
 import WebSocket from '../websocket/server';
 import rateLimiter from './middlewares/rateLimiter';

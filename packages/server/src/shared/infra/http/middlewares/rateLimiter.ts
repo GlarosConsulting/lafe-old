@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import Redis from 'ioredis';
 import { RateLimiterRedis } from 'rate-limiter-flexible';
 
-import cacheConfig from '@config/cache';
-
 import AppError from '@shared/errors/AppError';
+
+import cacheConfig from '@config/cache';
 
 const redisClient = new Redis(cacheConfig.config.redis);
 
