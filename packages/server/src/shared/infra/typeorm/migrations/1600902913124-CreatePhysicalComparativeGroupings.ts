@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreatePhysicalComparativeHeaders1600883013143
+export default class CreatePhysicalComparativeGroupings1600902913124
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'physical_comparative_headers',
+        name: 'physical_comparative_groupings',
         columns: [
           {
             name: 'id',
@@ -15,27 +15,19 @@ export default class CreatePhysicalComparativeHeaders1600883013143
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'spreadsheet_name',
+            name: 'title',
             type: 'varchar',
           },
           {
-            name: 'construction',
-            type: 'varchar',
+            name: 'duration',
+            type: 'integer',
           },
           {
-            name: 'constructive_unity',
-            type: 'varchar',
-          },
-          {
-            name: 'measurement',
-            type: 'varchar',
-          },
-          {
-            name: 'construction_start_date',
+            name: 'start_date',
             type: 'timestamp with time zone',
           },
           {
-            name: 'construction_end_date',
+            name: 'end_date',
             type: 'timestamp with time zone',
           },
           {
@@ -54,6 +46,6 @@ export default class CreatePhysicalComparativeHeaders1600883013143
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('physical_comparative_headers');
+    await queryRunner.dropTable('physical_comparative_groupings');
   }
 }

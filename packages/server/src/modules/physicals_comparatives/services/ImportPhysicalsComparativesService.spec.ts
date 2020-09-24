@@ -1,9 +1,11 @@
 import path from 'path';
 
-import FakePhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/repositories/fakes/FakePhysicalComparativeHeadersRepository';
-import FakePhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/fakes/FakePhysicalComparativeItemsRepository';
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import AppError from '@shared/errors/AppError';
+
+import FakePhysicalComparativeGroupingsRepository from '@modules/physicals_comparatives/repositories/fakes/FakePhysicalComparativeGroupingsRepository';
+import FakePhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/repositories/fakes/FakePhysicalComparativeHeadersRepository';
+import FakePhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/fakes/FakePhysicalComparativeItemsRepository';
 
 import ImportPhysicalsComparativesService from './ImportPhysicalsComparativesService';
 
@@ -14,6 +16,7 @@ const TESTS_INVALID_IMPORT_FILENAME =
   'invalid-import-physical-comparative-service-spreadsheet.xlsx';
 
 let fakePhysicalComparativeHeadersRepository: FakePhysicalComparativeHeadersRepository;
+let fakePhysicalComparativeGroupingsRepository: FakePhysicalComparativeGroupingsRepository;
 let fakePhysicalComparativeItemsRepository: FakePhysicalComparativeItemsRepository;
 let fakeStorageProvider: FakeStorageProvider;
 let importPhysicalsComparatives: ImportPhysicalsComparativesService;
@@ -21,11 +24,13 @@ let importPhysicalsComparatives: ImportPhysicalsComparativesService;
 describe('ImportPhysicalsComparatives', () => {
   beforeEach(() => {
     fakePhysicalComparativeHeadersRepository = new FakePhysicalComparativeHeadersRepository();
+    fakePhysicalComparativeGroupingsRepository = new FakePhysicalComparativeGroupingsRepository();
     fakePhysicalComparativeItemsRepository = new FakePhysicalComparativeItemsRepository();
     fakeStorageProvider = new FakeStorageProvider();
 
     importPhysicalsComparatives = new ImportPhysicalsComparativesService(
       fakePhysicalComparativeHeadersRepository,
+      fakePhysicalComparativeGroupingsRepository,
       fakePhysicalComparativeItemsRepository,
       fakeStorageProvider,
     );
@@ -54,23 +59,34 @@ describe('ImportPhysicalsComparatives', () => {
         construction: expect.any(String),
         constructive_unity: expect.any(String),
         measurement: expect.any(String),
-        construction_start: expect.any(Date),
-        construction_end: expect.any(Date),
+        construction_start_date: expect.any(Date),
+        construction_end_date: expect.any(Date),
       },
-      items: expect.arrayContaining([
-        {
-          id: expect.any(String),
-          description: expect.any(String),
-          und: expect.any(String),
-          duration: expect.any(Number),
-          start: expect.any(Date),
-          end: expect.any(Date),
-          percentage_weight: expect.any(Number),
-          status_in_days: expect.any(Number),
-          quantities: expect.any(String),
-          percentage: expect.any(String),
-          advance_percentage: expect.any(String),
-        },
+      complements: expect.arrayContaining([
+        expect.objectContaining({
+          grouping: {
+            id: expect.any(String),
+            title: expect.any(String),
+            duration: expect.any(Number),
+            start_date: expect.any(Date),
+            end_date: expect.any(Date),
+          },
+          items: expect.arrayContaining([
+            {
+              id: expect.any(String),
+              description: expect.any(String),
+              und: expect.any(String),
+              duration: expect.any(Number),
+              start_date: expect.any(Date),
+              end_date: expect.any(Date),
+              percentage_weight: expect.any(Number),
+              status_in_days: expect.any(Number),
+              quantities: expect.any(String),
+              percentage: expect.any(String),
+              advance_percentage: expect.any(String),
+            },
+          ]),
+        }),
       ]),
     });
   });

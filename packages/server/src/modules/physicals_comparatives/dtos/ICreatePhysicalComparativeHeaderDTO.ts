@@ -3,6 +3,6 @@ export default interface ICreatePhysicalComparativeHeaderDTO {
   construction: string;
   constructive_unity: string;
   measurement: string;
-  construction_start: Date;
-  construction_end: Date;
+  construction_start_date: Date;
+  construction_end_date: Date;
 }

@@ -1,8 +1,9 @@
 import path from 'path';
 
-import FakeBillsRepository from '@modules/bills/repositories/fakes/FakeBillsRepository';
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import AppError from '@shared/errors/AppError';
+
+import FakeBillsRepository from '@modules/bills/repositories/fakes/FakeBillsRepository';
 
 import ImportBillsService from './ImportBillsService';
 

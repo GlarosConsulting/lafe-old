@@ -3,6 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import { inject, injectable } from 'tsyringe';
 
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import AppError from '@shared/errors/AppError';
+
 import uploadConfig from '@config/upload';
 
 import parseDate from '@utils/parseDate';
@@ -10,8 +13,6 @@ import parsePrice from '@utils/parsePrice';
 
 import Bill from '@modules/bills/infra/typeorm/entities/Bill';
 import IBillsRepository from '@modules/bills/repositories/IBillsRepository';
-import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
-import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   importFilename: string;

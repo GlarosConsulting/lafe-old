@@ -6,28 +6,22 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('physical_comparative_headers')
-export default class PhysicalComparativeHeader {
+@Entity('physical_comparative_groupings')
+export default class PhysicalComparativeGrouping {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  spreadsheet_name: string;
+  title: string;
 
-  @Column()
-  construction: string;
-
-  @Column()
-  constructive_unity: string;
-
-  @Column()
-  measurement: string;
+  @Column('integer')
+  duration: number;
 
   @Column('timestamp with time zone')
-  construction_start_date: Date;
+  start_date: Date;
 
   @Column('timestamp with time zone')
-  construction_end_date: Date;
+  end_date: Date;
 
   @CreateDateColumn()
   created_at: Date;

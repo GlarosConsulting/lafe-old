@@ -19,6 +19,10 @@ export default class CreatePhysicalComparativeItems1600882968337
             type: 'varchar',
           },
           {
+            name: 'grouping_id',
+            type: 'varchar',
+          },
+          {
             name: 'description',
             type: 'varchar',
           },
@@ -31,11 +35,11 @@ export default class CreatePhysicalComparativeItems1600882968337
             type: 'integer',
           },
           {
-            name: 'start',
+            name: 'start_date',
             type: 'timestamp with time zone',
           },
           {
-            name: 'end',
+            name: 'end_date',
             type: 'timestamp with time zone',
           },
           {
@@ -76,6 +80,14 @@ export default class CreatePhysicalComparativeItems1600882968337
             columnNames: ['header_id'],
             referencedColumnNames: ['id'],
             referencedTableName: 'physical_comparative_headers',
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
+          {
+            name: 'PhysicalComparativeItemGrouping',
+            columnNames: ['grouping_id'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'physical_comparative_groupings',
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },

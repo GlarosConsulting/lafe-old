@@ -21,10 +21,10 @@ export default class PhysicalComparativeItem {
   duration: number;
 
   @Column('timestamp with time zone')
-  start: Date;
+  start_date: Date;
 
   @Column('timestamp with time zone')
-  end: Date;
+  end_date: Date;
 
   @Column('decimal')
   percentage_weight: number;
