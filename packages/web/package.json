@@ -120,6 +120,7 @@
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "chai": "^4.2.0",
     "chalk": "4.1.0",
+    "cross-env": "^7.0.2",
     "css-loader": "2.1.1",
     "dotenv": "8.0.0",
     "dotenv-expand": "5.1.0",
