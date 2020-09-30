@@ -1,5 +1,5 @@
 import React from 'react';
-import AnimateNumber from 'react-animated-number';
+// import AnimateNumber from 'react-animated-number';
 import { Row, Col, Progress, Table, Label, Input } from 'reactstrap';
 
 import Widget from '../../components/Widget';
@@ -7,7 +7,7 @@ import peopleA1 from '../../images/people/a1.jpg';
 import peopleA2 from '../../images/people/a2.jpg';
 import peopleA4 from '../../images/people/a4.jpg';
 import peopleA5 from '../../images/people/a5.jpg';
-import Map from './components/am4chartMap/am4chartMap';
+// import Map from './components/am4chartMap/am4chartMap';
 import Calendar from './components/calendar/Calendar';
 import Rickshaw from './components/rickshaw/Rickshaw';
 import s from './Dashboard.module.scss';
@@ -62,157 +62,11 @@ class Dashboard extends React.Component {
 
     return (
       <div className={s.root}>
-        <h1 className="page-title">
-          Dashboard &nbsp;
-          <small>
-            <small>The Lucky One</small>
-          </small>
-        </h1>
-
-        <Row>
-          <Col lg={7}>
-            <Widget className="bg-transparent">
-              <Map />
-            </Widget>
-          </Col>
-          <Col lg={1} />
-
-          <Col lg={4}>
-            <Widget
-              className="bg-transparent"
-              title={
-                <h5>
-                  <span className="fw-semi-bold">&nbsp;Statistics</span>
-                </h5>
-              }
-              settings
-              refresh
-              close
-            >
-              <p>
-                Status:
-                <strong>Live</strong>
-              </p>
-
-              <p>
-                <span className="circle bg-default text-white">
-                  <i className="fa fa-map-marker" />
-                </span>
-                &nbsp; 146 Countries, 2759 Cities
-              </p>
-
-              <div className="row progress-stats">
-                <div className="col-md-9 col-12">
-                  <h6 className="name fw-semi-bold">Foreign Visits</h6>
-
-                  <p className="description deemphasize mb-xs text-white">
-                    Some Cool Text
-                  </p>
-
-                  <Progress
-                    color="primary"
-                    value="60"
-                    className="bg-custom-dark progress-xs"
-                  />
-                </div>
-
-                <div className="col-md-3 col-12 text-center">
-                  <span className="status rounded rounded-lg bg-default text-light">
-                    <small>
-                      <AnimateNumber value={75} />
-                      <span>%</span>
-                    </small>
-                  </span>
-                </div>
-              </div>
-
-              <div className="row progress-stats">
-                <div className="col-md-9 col-12">
-                  <h6 className="name fw-semi-bold">Local Visits</h6>
-
-                  <p className="description deemphasize mb-xs text-white">
-                    P. to C. Conversion
-                  </p>
-
-                  <Progress
-                    color="danger"
-                    value="39"
-                    className="bg-custom-dark progress-xs"
-                  />
-                </div>
-
-                <div className="col-md-3 col-12 text-center">
-                  <span className="status rounded rounded-lg bg-default text-light">
-                    <small>
-                      <AnimateNumber value={84} />
-                      <span>%</span>
-                    </small>
-                  </span>
-                </div>
-              </div>
-
-              <div className="row progress-stats">
-                <div className="col-md-9 col-12">
-                  <h6 className="name fw-semi-bold">Sound Frequencies</h6>
-
-                  <p className="description deemphasize mb-xs text-white">
-                    Average Bitrate
-                  </p>
-
-                  <Progress
-                    color="success"
-                    value="80"
-                    className="bg-custom-dark progress-xs"
-                  />
-                </div>
-
-                <div className="col-md-3 col-12 text-center">
-                  <span className="status rounded rounded-lg bg-default text-light">
-                    <small>
-                      <AnimateNumber value={92} />
-                      <span>%</span>
-                    </small>
-                  </span>
-                </div>
-              </div>
-
-              <h6 className="fw-semi-bold mt">Map Distributions</h6>
-
-              <p>
-                Tracking:
-                <strong>Active</strong>
-              </p>
-
-              <p>
-                <span className="circle bg-default text-white">
-                  <i className="fa fa-cog" />
-                </span>
-                &nbsp; 391 elements installed, 84 sets
-              </p>
-
-              <div className="input-group mt">
-                <input
-                  type="text"
-                  className="form-control bg-custom-dark border-0"
-                  placeholder="Search Map"
-                />
-
-                <span className="input-group-btn">
-                  <button
-                    type="submit"
-                    className={`btn btn-subtle-blue ${s.searchBtn}`}
-                  >
-                    <i className="fa fa-search text-light" />
-                  </button>
-                </span>
-              </div>
-            </Widget>
-          </Col>
-        </Row>
+        <h1 className="page-title">Dashboard</h1>
 
         <Row>
           <Col lg={4} xs={12}>
-            <Widget title={<h6> USERBASE GROWTH </h6>} close settings>
+            <Widget title={<h6>USERBASE GROWTH</h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">
                   <h6 className="name">Overall Growth</h6>
@@ -249,7 +103,7 @@ class Dashboard extends React.Component {
           </Col>
 
           <Col lg={4} xs={12}>
-            <Widget title={<h6> TRAFFIC VALUES </h6>} close settings>
+            <Widget title={<h6>TRAFFIC VALUES</h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">
                   <h6 className="name">Overall Values</h6>
@@ -286,7 +140,7 @@ class Dashboard extends React.Component {
           </Col>
 
           <Col lg={4} xs={12}>
-            <Widget title={<h6> RANDOM VALUES </h6>} close settings>
+            <Widget title={<h6>RANDOM VALUES</h6>} close settings>
               <div className="stats-row">
                 <div className="stat-item">
                   <h6 className="name fs-sm">Overcome T.</h6>
@@ -329,8 +183,7 @@ class Dashboard extends React.Component {
               title={
                 <h6>
                   <span className="badge badge-success">New</span>
-
-                  <span>Messages</span>
+                  <span className="ml-2">Messages</span>
                 </h6>
               }
               refresh
@@ -434,7 +287,7 @@ class Dashboard extends React.Component {
             <Widget
               title={
                 <h6>
-                  Market
+                  <span>Market </span>
                   <span className="fw-semi-bold">Stats</span>
                 </h6>
               }
@@ -444,9 +297,9 @@ class Dashboard extends React.Component {
                 <h3>$720 Earned</h3>
 
                 <p className="fs-mini text-muted mb mt-sm">
-                  Target
-                  <span className="fw-semi-bold">$820</span>
-                  <span>day earnings is</span>
+                  <span>Target </span>
+                  <span className="fw-semi-bold">$820 </span>
+                  <span>day earnings is </span>
                   <span className="fw-semi-bold">96%</span>
                 </p>
               </div>

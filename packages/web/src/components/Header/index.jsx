@@ -10,7 +10,6 @@ import {
   InputGroupText,
   InputGroup,
   Input,
-  UncontrolledAlert,
   Dropdown,
   Collapse,
   DropdownToggle,
@@ -147,20 +146,6 @@ class Header extends React.Component {
 
     return (
       <Navbar className={`d-print-none ${s.root}`}>
-        <UncontrolledAlert
-          className={`${s.alert} mr-3 d-lg-down-none animate__animated animate__bounceIn animate__delay-1s`}
-        >
-          <i className="fa fa-info-circle mr-1" />
-          Check out Light Blue
-          <button
-            type="button"
-            className="btn-link"
-            onClick={() => this.setState({ settingsOpen: true })}
-          >
-            settings
-          </button>
-          on the right!
-        </UncontrolledAlert>
         <Collapse
           className={`${s.searchCollapse} ml-lg-0 mr-md-3`}
           isOpen={searchOpen}
