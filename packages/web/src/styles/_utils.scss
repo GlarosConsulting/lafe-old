@@ -143,6 +143,12 @@ $z-index-variants: (more: 1, less: -1, '10': 10, '-10': -10);
   }
 }
 
+@mixin bg-variant($selector, $value, $ignoreWarning: true) {
+  @if ($ignoreWarning == false) {
+    @warn "The `bg-variant()` mixin has been deprecated as of v4.1.0. It will be removed entirely in v5.";
+  }
+}
+
 @include bg-variant('.bg-dark', $text-color);
 @include bg-variant('.bg-widget', $widget-bg);
 
@@ -226,6 +232,12 @@ $z-index-variants: (more: 1, less: -1, '10': 10, '-10': -10);
 }
 
 //override bs .text-* classes so they use $brand-* variables
+
+@mixin text-emphasis-variant($selector, $value, $ignoreWarning: true) {
+  @if ($ignoreWarning == false) {
+    @warn "The `text-emphasis-variant()` mixin has been deprecated as of v4.1.0. It will be removed entirely in v5.";
+  }
+}
 
 @include text-emphasis-variant('.text-primary', theme-color('primary'));
 @include text-emphasis-variant('.text-success', theme-color('success'));
