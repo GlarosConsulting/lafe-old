@@ -28,6 +28,7 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "react/prefer-stateless-function": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "camelcase": "off",
@@ -38,6 +39,7 @@
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
+    "react/jsx-wrap-multilines": "off",
     "import/no-dynamic-require": "off",
     "no-param-reassign": "off",
     "no-plusplus": "off",
@@ -123,6 +125,8 @@
       "error",
       "ignorePackages",
       {
+        "js": "never",
+        "jsx": "never",
         "ts": "never",
         "tsx": "never"
       }
