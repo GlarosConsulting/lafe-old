@@ -21,3 +21,6 @@ coverage
 .env
 ormconfig.json
 docker-compose.yml
+
+# MacOS
+.DS_STORE
