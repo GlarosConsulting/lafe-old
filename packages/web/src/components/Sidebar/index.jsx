@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { dismissAlert } from '../../actions/alerts';
 import { changeActiveSidebarItem } from '../../actions/navigation';
 import { logoutUser } from '../../actions/user';
+import logoImg from '../../images/logo.png';
 import LinksGroup from './LinksGroup';
 import s from './Sidebar.module.scss';
 
@@ -73,9 +74,8 @@ class Sidebar extends React.Component {
         }}
       >
         <header className={s.logo}>
-          <a href="https://demo.flatlogic.com/light-blue-react/">
-            <span>Light</span>
-            <span lassName="fw-bold">Blue</span>
+          <a href="http://lafengenharia.com.br/">
+            <img src={logoImg} alt="Lafe" />
           </a>
         </header>
 
