@@ -57,8 +57,8 @@ class Am4chartMap extends Component {
     const polygonTemplate = polygonSeries.mapPolygons.template;
 
     polygonTemplate.tooltipText = '{name}';
-    polygonTemplate.fill = am4core.color("#'74D84");
-    polygonTemplate.stroke = am4core.color('#69799');
+    polygonTemplate.fill = am4core.color('#474d84');
+    polygonTemplate.stroke = am4core.color('#6979C9');
 
     const hs = polygonTemplate.states.create('hover');
 
