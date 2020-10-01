@@ -1,24 +1,18 @@
 import React from 'react';
 // import AnimateNumber from 'react-animated-number';
-import { Row, Col, Progress, Table, Label, Input } from 'reactstrap';
+import ApexChart from 'react-apexcharts';
+import { Row, Col } from 'reactstrap';
+
+import ReactEchartsCore from 'echarts-for-react/lib/core';
+import echarts from 'echarts/lib/echarts'; // eslint-disable-line import-helpers/order-imports
 
 import Widget from '../../components/Widget';
-import peopleA1 from '../../images/people/a1.jpg';
-import peopleA2 from '../../images/people/a2.jpg';
-import peopleA4 from '../../images/people/a4.jpg';
-import peopleA5 from '../../images/people/a5.jpg';
-// import Map from './components/am4chartMap/am4chartMap';
-import Calendar from './components/calendar/Calendar';
-import Rickshaw from './components/rickshaw/Rickshaw';
 import s from './Dashboard.module.scss';
+import { chartsData } from './mock';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      checkedArr: [false, false, false],
-    };
 
     this.checkTable = this.checkTable.bind(this);
   }
@@ -58,344 +52,74 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const { checkedArr } = this.state;
-
     return (
       <div className={s.root}>
         <h1 className="page-title">Dashboard</h1>
 
         <Row>
-          <Col lg={4} xs={12}>
-            <Widget title={<h6>USERBASE GROWTH</h6>} close settings>
-              <div className="stats-row">
-                <div className="stat-item">
-                  <h6 className="name">Overall Growth</h6>
-                  <p className="value">76.38%</p>
-                </div>
-
-                <div className="stat-item">
-                  <h6 className="name">Montly</h6>
-                  <p className="value">10.38%</p>
-                </div>
-
-                <div className="stat-item">
-                  <h6 className="name">24h</h6>
-                  <p className="value">3.38%</p>
-                </div>
-              </div>
-
-              <Progress
-                color="success"
-                value="60"
-                className="bg-custom-dark progress-xs"
+          <Col lg={6} xs={12}>
+            <Widget
+              title={
+                <h5>
+                  <span>Despesas Diretas - </span>
+                  <span className="fw-semi-bold">Previstas x Realizadas</span>
+                </h5>
+              }
+              collapse
+            >
+              <ApexChart
+                type="bar"
+                series={chartsData.direct_expenses.columns.series}
+                options={chartsData.direct_expenses.columns.options}
+                height={350}
               />
-
-              <p>
-                <small>
-                  <span className="circle bg-default text-white">
-                    <i className="fa fa-chevron-up" />
-                  </span>
-                </small>
-                <span className="fw-semi-bold">&nbsp;17% higher</span>
-                &nbsp;than last month
-              </p>
             </Widget>
           </Col>
 
-          <Col lg={4} xs={12}>
-            <Widget title={<h6>TRAFFIC VALUES</h6>} close settings>
-              <div className="stats-row">
-                <div className="stat-item">
-                  <h6 className="name">Overall Values</h6>
-                  <p className="value">17 567 318</p>
-                </div>
-
-                <div className="stat-item">
-                  <h6 className="name">Montly</h6>
-                  <p className="value">55 120</p>
-                </div>
-
-                <div className="stat-item">
-                  <h6 className="name">24h</h6>
-                  <p className="value">9 695</p>
-                </div>
-              </div>
-
-              <Progress
-                color="danger"
-                value="60"
-                className="bg-custom-dark progress-xs"
+          <Col lg={6} xs={12}>
+            <Widget collapse>
+              <ReactEchartsCore
+                echarts={echarts}
+                option={chartsData.direct_expenses.lines}
+                opts={{
+                  renderer: 'canvas',
+                }}
+                style={{ height: '400px' }}
               />
-
-              <p>
-                <small>
-                  <span className="circle bg-default text-white">
-                    <i className="fa fa-chevron-down" />
-                  </span>
-                </small>
-                <span className="fw-semi-bold">&nbsp;8% lower</span>
-                &nbsp;than last month
-              </p>
-            </Widget>
-          </Col>
-
-          <Col lg={4} xs={12}>
-            <Widget title={<h6>RANDOM VALUES</h6>} close settings>
-              <div className="stats-row">
-                <div className="stat-item">
-                  <h6 className="name fs-sm">Overcome T.</h6>
-                  <p className="value">104.85%</p>
-                </div>
-
-                <div className="stat-item">
-                  <h6 className="name fs-sm">Takeoff Angle</h6>
-                  <p className="value">14.29&deg;</p>
-                </div>
-
-                <div className="stat-item">
-                  <h6 className="name fs-sm">World Pop.</h6>
-                  <p className="value">7,211M</p>
-                </div>
-              </div>
-
-              <Progress
-                color="bg-primary"
-                value="60"
-                className="bg-custom-dark progress-xs"
-              />
-
-              <p>
-                <small>
-                  <span className="circle bg-default text-white">
-                    <i className="fa fa-plus" />
-                  </span>
-                </small>
-                <span className="fw-semi-bold">&nbsp;8 734 higher</span>
-                &nbsp;than last month
-              </p>
             </Widget>
           </Col>
         </Row>
 
         <Row>
-          <Col lg={4} xs={12}>
+          <Col lg={6} xs={12}>
             <Widget
               title={
-                <h6>
-                  <span className="badge badge-success">New</span>
-                  <span className="ml-2">Messages</span>
-                </h6>
+                <h5>
+                  <span>Despesas Totais (DD + DI) - </span>
+                  <span className="fw-semi-bold">Previstas x Realizadas</span>
+                </h5>
               }
-              refresh
-              close
+              collapse
             >
-              <div className="widget-body undo_padding">
-                <div className="list-group list-group-lg">
-                  <button type="button" className="list-group-item text-left">
-                    <span className="thumb-sm float-left mr">
-                      <img
-                        className="rounded-circle"
-                        src={peopleA2}
-                        alt="..."
-                      />
-
-                      <i className="status status-bottom bg-success" />
-                    </span>
-
-                    <div>
-                      <h6 className="m-0">Chris Gray</h6>
-
-                      <p className="help-block text-ellipsis m-0">
-                        Hey! What&apos;s up? So many times since we
-                      </p>
-                    </div>
-                  </button>
-
-                  <button type="button" className="list-group-item text-left">
-                    <span className="thumb-sm float-left mr">
-                      <img
-                        className="rounded-circle"
-                        src={peopleA4}
-                        alt="..."
-                      />
-
-                      <i className="status status-bottom bg-success" />
-                    </span>
-
-                    <div>
-                      <h6 className="m-0">Jamey Brownlow</h6>
-
-                      <p className="help-block text-ellipsis m-0">
-                        Good news coming tonight. Seems they agreed to proceed
-                      </p>
-                    </div>
-                  </button>
-
-                  <button type="button" className="list-group-item text-left">
-                    <span className="thumb-sm float-left mr">
-                      <img
-                        className="rounded-circle"
-                        src={peopleA1}
-                        alt="..."
-                      />
-
-                      <i className="status status-bottom bg-default" />
-                    </span>
-
-                    <div>
-                      <h6 className="m-0">Livia Walsh</h6>
-
-                      <p className="help-block text-ellipsis m-0">
-                        Check my latest email plz!
-                      </p>
-                    </div>
-                  </button>
-
-                  <button type="button" className="list-group-item text-left">
-                    <span className="thumb-sm float-left mr">
-                      <img
-                        className="rounded-circle"
-                        src={peopleA5}
-                        alt="..."
-                      />
-
-                      <i className="status status-bottom bg-danger" />
-                    </span>
-
-                    <div>
-                      <h6 className="m-0">Jaron Fitzroy</h6>
-
-                      <p className="help-block text-ellipsis m-0">
-                        What about summer break?
-                      </p>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              <footer className="bg-widget-transparent mt">
-                <input
-                  type="search"
-                  className="form-control form-control-sm bg-custom-dark border-0"
-                  placeholder="Search"
-                />
-              </footer>
+              <ApexChart
+                type="bar"
+                series={chartsData.total_expenses.columns.series}
+                options={chartsData.total_expenses.columns.options}
+                height={350}
+              />
             </Widget>
           </Col>
 
-          <Col lg={4} xs={12}>
-            <Widget
-              title={
-                <h6>
-                  <span>Market </span>
-                  <span className="fw-semi-bold">Stats</span>
-                </h6>
-              }
-              close
-            >
-              <div className="widget-body">
-                <h3>$720 Earned</h3>
-
-                <p className="fs-mini text-muted mb mt-sm">
-                  <span>Target </span>
-                  <span className="fw-semi-bold">$820 </span>
-                  <span>day earnings is </span>
-                  <span className="fw-semi-bold">96%</span>
-                </p>
-              </div>
-
-              <div className={`widget-table-overflow ${s.table}`}>
-                <Table striped size="sm">
-                  <thead className="no-bd">
-                    <tr>
-                      <th>
-                        <div className="checkbox abc-checkbox">
-                          <Input
-                            className="mt-0"
-                            id="checkbox210"
-                            type="checkbox"
-                            onClick={() => this.checkTable(0)}
-                            checked={checkedArr[0]}
-                            readOnly
-                          />
-                          <Label for="checkbox210" />
-                        </div>
-                      </th>
-                      <th>&nbsp;</th>
-                      <th>&nbsp;</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div className="checkbox abc-checkbox">
-                          <Input
-                            className="mt-0"
-                            id="checkbox212"
-                            type="checkbox"
-                            onClick={() => this.checkTable(1)}
-                            checked={checkedArr[1]}
-                            readOnly
-                          />
-                          <Label for="checkbox212" />
-                        </div>
-                      </td>
-                      <td>HP Core i7</td>
-                      <td className="text-align-right fw-semi-bold">$346.1</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="checkbox abc-checkbox">
-                          <Input
-                            className="mt-0"
-                            id="checkbox214"
-                            onClick={() => this.checkTable(2)}
-                            type="checkbox"
-                            checked={checkedArr[2]}
-                            readOnly
-                          />
-                          <Label for="checkbox214" />
-                        </div>
-                      </td>
-                      <td>Air Pro</td>
-                      <td className="text-align-right fw-semi-bold">$533.1</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </div>
-
-              <div
-                className="widget-body mt-xlg chart-overflow-bottom"
-                style={{ height: '100px' }}
-              >
-                <Rickshaw height={100} />
-              </div>
-            </Widget>
-          </Col>
-
-          <Col lg={4} xs={12}>
-            <Widget
-              title={<h6>Calendar</h6>}
-              settings
-              close
-              bodyClass="pt-2 px-0 py-0"
-            >
-              <Calendar />
-              <div className="list-group fs-mini">
-                <button type="button" className="list-group-item text-ellipsis">
-                  <span className="badge badge-pill badge-primary float-right">
-                    6:45
-                  </span>
-                  Weed out the flower bed
-                </button>
-
-                <button type="button" className="list-group-item text-ellipsis">
-                  <span className="badge badge-pill badge-success float-right">
-                    9:41
-                  </span>
-                  Stop world water pollution
-                </button>
-              </div>
+          <Col lg={6} xs={12}>
+            <Widget collapse>
+              <ReactEchartsCore
+                echarts={echarts}
+                option={chartsData.total_expenses.lines}
+                opts={{
+                  renderer: 'canvas',
+                }}
+                style={{ height: '400px' }}
+              />
             </Widget>
           </Col>
         </Row>

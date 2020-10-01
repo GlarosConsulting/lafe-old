@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Progress, Alert } from 'reactstrap';
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -64,7 +63,7 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { activeItem, alertsList, dispatch } = this.props;
+    const { activeItem, dispatch } = this.props;
 
     return (
       <nav
@@ -152,63 +151,6 @@ class Sidebar extends React.Component {
             ]}
           />
         </ul>
-
-        <h5 className={s.navTitle}>
-          LABELS
-          <a className={s.actionLink}>
-            <i
-              className={`${s.glyphiconSm} glyphicon glyphicon-plus float-right`}
-            />
-          </a>
-        </h5>
-
-        <ul className={s.sidebarLabels}>
-          <li>
-            <a href="#">
-              <i className="fa fa-circle text-success mr-2" />
-              <span className={s.labelName}>My Recent</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#">
-              <i className="fa fa-circle text-primary mr-2" />
-              <span className={s.labelName}>Starred</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#">
-              <i className="fa fa-circle text-danger mr-2" />
-              <span className={s.labelName}>Background</span>
-            </a>
-          </li>
-        </ul>
-
-        <h5 className={s.navTitle}>PROJECTS</h5>
-
-        <div className={s.sidebarAlerts}>
-          {alertsList.map(alert => (
-            <Alert
-              key={alert.id}
-              className={s.sidebarAlert}
-              color="transparent"
-              isOpen
-              toggle={() => {
-                this.dismissAlert(alert.id);
-              }}
-            >
-              <span>{alert.title}</span>
-              <br />
-              <Progress
-                className="bg-custom-dark progress-xs mt-1"
-                color={alert.color}
-                value={alert.value}
-              />
-              <small>{alert.footer}</small>
-            </Alert>
-          ))}
-        </div>
       </nav>
     );
   }
