@@ -76,7 +76,7 @@ class Charts extends React.Component {
               <Widget
                 title={
                   <h5>
-                    <span>Apex</span>
+                    <span>Apex </span>
                     <span className="fw-semi-bold">Column Chart</span>
                   </h5>
                 }
@@ -97,7 +97,7 @@ class Charts extends React.Component {
               <Widget
                 title={
                   <h5>
-                    <span>Echarts</span>
+                    <span>Echarts </span>
                     <span className="fw-semi-bold">Line Chart</span>
                   </h5>
                 }
@@ -117,7 +117,7 @@ class Charts extends React.Component {
               <Widget
                 title={
                   <h5>
-                    <span>Highcharts</span>
+                    <span>Highcharts </span>
                     <span className="fw-semi-bold">Line Chart</span>
                   </h5>
                 }
@@ -182,7 +182,7 @@ class Charts extends React.Component {
                   <Widget
                     title={
                       <h5>
-                        <span>Apex</span>
+                        <span>Apex </span>
                         <span className="fw-semi-bold">Monochrome Pie</span>
                       </h5>
                     }
@@ -203,7 +203,7 @@ class Charts extends React.Component {
                   <Widget
                     title={
                       <h5>
-                        <span>Chart</span>
+                        <span>Chart </span>
                         <span className="fw-semi-bold">Donut Chart</span>
                       </h5>
                     }
@@ -223,7 +223,7 @@ class Charts extends React.Component {
                   <Widget
                     title={
                       <h5>
-                        <span>Highcharts</span>
+                        <span>Highcharts </span>
                         <span className="fw-semi-bold">Live Chart</span>
                       </h5>
                     }
@@ -240,7 +240,7 @@ class Charts extends React.Component {
               <Widget
                 title={
                   <h5>
-                    <span>Echarts</span>
+                    <span>Echarts </span>
                     <span className="fw-semi-bold">River Chart</span>
                   </h5>
                 }
