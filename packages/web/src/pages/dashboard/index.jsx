@@ -8,7 +8,7 @@ import echarts from 'echarts/lib/echarts'; // eslint-disable-line import-helpers
 
 import Widget from '../../components/Widget';
 import s from './Dashboard.module.scss';
-import { chartsData } from './mock';
+import { charts_data } from './mock';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -69,8 +69,8 @@ class Dashboard extends React.Component {
             >
               <ApexChart
                 type="bar"
-                series={chartsData.direct_expenses.columns.series}
-                options={chartsData.direct_expenses.columns.options}
+                series={charts_data.direct_expenses.columns.series}
+                options={charts_data.direct_expenses.columns.options}
                 height={350}
               />
             </Widget>
@@ -80,7 +80,7 @@ class Dashboard extends React.Component {
             <Widget collapse>
               <ReactEchartsCore
                 echarts={echarts}
-                option={chartsData.direct_expenses.lines}
+                option={charts_data.direct_expenses.lines}
                 opts={{
                   renderer: 'canvas',
                 }}
@@ -103,8 +103,8 @@ class Dashboard extends React.Component {
             >
               <ApexChart
                 type="bar"
-                series={chartsData.total_expenses.columns.series}
-                options={chartsData.total_expenses.columns.options}
+                series={charts_data.total_expenses.columns.series}
+                options={charts_data.total_expenses.columns.options}
                 height={350}
               />
             </Widget>
@@ -114,7 +114,7 @@ class Dashboard extends React.Component {
             <Widget collapse>
               <ReactEchartsCore
                 echarts={echarts}
-                option={chartsData.total_expenses.lines}
+                option={charts_data.total_expenses.lines}
                 opts={{
                   renderer: 'canvas',
                 }}
