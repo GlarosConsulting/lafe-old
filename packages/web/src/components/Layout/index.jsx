@@ -72,21 +72,29 @@ class Layout extends React.Component {
                     <Route
                       path="/app/main"
                       exact
-                      render={() => <Redirect to="/app/main/dashboard" />}
+                      render={() => (
+                        <Redirect to="/app/main/analise-fisica-macro" />
+                      )}
                     />
+
                     <Route
-                      path="/app/main/dashboard"
+                      path="/app/main/analise-fisica-macro"
                       exact
                       component={Dashboard}
                     />
+
                     <Route path="/app/icons" exact component={UIIcons} />
+
                     <Route
                       path="/app/notifications"
                       exact
                       component={UINotifications}
                     />
+
                     <Route path="/app/charts" exact component={Charts} />
+
                     <Route path="/app/tables" exact component={TablesStatic} />
+
                     <Route
                       path="/app/typography"
                       exact

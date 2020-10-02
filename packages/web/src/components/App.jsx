@@ -56,16 +56,20 @@ class App extends React.PureComponent {
               exact
               render={() => <Redirect to="/app/main" />}
             />
+
             <PrivateRoute
               path="/app"
               dispatch={dispatch}
               component={LayoutComponent}
             />
+
             <Route path="/register" exact component={Register} />
             <Route path="/login" exact component={Login} />
             <Route path="/error" exact component={ErrorPage} />
+
             <Route component={ErrorPage} />
-            <Redirect from="*" to="/app/main/dashboard" />
+
+            <Redirect from="*" to="/app/main/analise-fisica-macro" />
           </Switch>
         </HashRouter>
       </div>

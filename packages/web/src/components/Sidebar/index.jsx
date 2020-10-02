@@ -84,14 +84,14 @@ class Sidebar extends React.Component {
               dispatch(changeActiveSidebarItem(item))
             }
             activeItem={activeItem}
-            header="Dashboard"
+            header="Análise física macro"
             isHeader
             iconName="flaticon-home"
             link="/app/main"
             index="main"
           />
 
-          <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
+          {/* <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
 
           <LinksGroup
             onActiveSidebarItemChange={item =>
@@ -149,7 +149,7 @@ class Sidebar extends React.Component {
                 link: '/app/icons',
               },
             ]}
-          />
+          /> */}
         </ul>
       </nav>
     );

@@ -10,12 +10,12 @@ class BreadcrumbHistory extends Component {
     const route = url
       .split('/')
       .slice(1)
-      .map(item =>
-        item
-          .split('-')
-          .map(word => word[0].toUpperCase() + word.slice(1))
-          .join(' '),
-      );
+      .map(item => {
+        const replaced = item.replace(/-/g, ' ');
+        const word = replaced[0].toUpperCase() + replaced.slice(1);
+
+        return word;
+      });
 
     const { length } = route;
 

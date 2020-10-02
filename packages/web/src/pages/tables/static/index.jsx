@@ -274,7 +274,7 @@ class Static extends React.Component {
             <Widget
               title={
                 <h5>
-                  <span>Table</span>
+                  <span>Table </span>
                   <span className="fw-semi-bold">Styles</span>
                 </h5>
               }
@@ -282,7 +282,7 @@ class Static extends React.Component {
               close
             >
               <h3>
-                <span>Stripped</span>
+                <span>Stripped </span>
                 <spanStripped className="fw-semi-bold">Table</spanStripped>
               </h3>
 
