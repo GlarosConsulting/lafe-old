@@ -1,6 +1,6 @@
 const config = {
-  name: 'light-blue-template',
-  title: 'Light Blue Template App built with React JS by Flatlogic',
+  name: 'lafe-dashboard',
+  title: 'Lafe',
   version: '3.8.0',
   settings: {
     screens: {
@@ -19,6 +19,7 @@ const config = {
 
 export default function isScreen(size) {
   const screenPx = window.innerWidth;
+
   return (
     (screenPx >= config.settings.screens[`${size}-min`] || size === 'xs') &&
     (screenPx <= config.settings.screens[`${size}-max`] || size === 'xl')
