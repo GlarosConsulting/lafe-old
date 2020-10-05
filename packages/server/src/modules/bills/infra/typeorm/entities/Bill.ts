@@ -12,6 +12,9 @@ export default class Bill {
   id: string;
 
   @Column()
+  spreadsheet_name: string;
+
+  @Column()
   category: string;
 
   @Column()

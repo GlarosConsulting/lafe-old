@@ -15,6 +15,7 @@ class BillsRepository implements IBillsRepository {
   public async createAll(data: ICreateBillDTO[]): Promise<Bill[]> {
     const bills = data.map(billData => {
       const {
+        spreadsheet_name,
         category,
         spreadsheet_code,
         fiscal_document,
@@ -26,6 +27,7 @@ class BillsRepository implements IBillsRepository {
       } = billData;
 
       return this.ormRepository.create({
+        spreadsheet_name,
         category,
         spreadsheet_code,
         fiscal_document,

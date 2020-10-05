@@ -4,6 +4,12 @@ import './providers';
 
 import BillsRepository from '@modules/bills/infra/typeorm/repositories/BillsRepository';
 import IBillsRepository from '@modules/bills/repositories/IBillsRepository';
+import BricklayerExpenseItemsRepository from '@modules/expenses/infra/typeorm/repositories/BricklayerExpenseItemsRepository';
+import ExpenseItemsRepository from '@modules/expenses/infra/typeorm/repositories/ExpenseItemsRepository';
+import ServantExpenseItemsRepository from '@modules/expenses/infra/typeorm/repositories/ServantExpenseItemsRepository';
+import IBricklayerExpenseItemsRepository from '@modules/expenses/repositories/IBricklayerExpenseItemsRepository';
+import IExpenseItemsRepository from '@modules/expenses/repositories/IExpenseItemsRepository';
+import IServantExpenseItemsRepository from '@modules/expenses/repositories/IServantExpenseItemsRepository';
 import PhysicalComparativeGroupingsRepository from '@modules/physicals_comparatives/infra/typeorm/repositories/PhysicalComparativeGroupingsRepository';
 import PhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/infra/typeorm/repositories/PhysicalComparativeHeadersRepository';
 import PhysicalComparativeItemsRepository from '@modules/physicals_comparatives/infra/typeorm/repositories/PhysicalComparativeItemsRepository';
@@ -29,4 +35,19 @@ container.registerSingleton<IPhysicalComparativeGroupingsRepository>(
 container.registerSingleton<IPhysicalComparativeItemsRepository>(
   'PhysicalComparativeItemsRepository',
   PhysicalComparativeItemsRepository,
+);
+
+container.registerSingleton<IExpenseItemsRepository>(
+  'ExpenseItemsRepository',
+  ExpenseItemsRepository,
+);
+
+container.registerSingleton<IServantExpenseItemsRepository>(
+  'ServantExpenseItemsRepository',
+  ServantExpenseItemsRepository,
+);
+
+container.registerSingleton<IBricklayerExpenseItemsRepository>(
+  'BricklayerExpenseItemsRepository',
+  BricklayerExpenseItemsRepository,
 );

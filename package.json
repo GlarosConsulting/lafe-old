@@ -36,7 +36,7 @@
   "lint-staged": {
     "packages/**/*.{ts,tsx}": [
       "yarn lint:fix",
-      "git add -A",
+      "git add",
       "yarn test --bail --findRelatedTests"
     ]
   },
@@ -72,7 +72,7 @@
     "lerna": "^3.22.1",
     "lint-staged": "^10.4.0",
     "prettier": "^2.0.5",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^26.4.1",
     "typescript": "^3.7.4"
   },
   "dependencies": {}

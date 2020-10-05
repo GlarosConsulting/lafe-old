@@ -1,4 +1,5 @@
 export default interface ICreateBillDTO {
+  spreadsheet_name: string;
   category: string;
   spreadsheet_code: string;
   fiscal_document: string;

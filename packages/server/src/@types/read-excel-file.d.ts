@@ -22,7 +22,7 @@ declare module 'read-excel-file/node' {
 
   interface SchemaEntryParsed {
     prop: string;
-    parse<T>(value: string): ?T;
+    parse<T>(value: string): T | null;
     oneOf?: T[];
     required?: boolean;
     validate?<T>(value: T): void;
