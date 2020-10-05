@@ -11,22 +11,12 @@ import uploadConfig from '@config/upload';
 import parseDate from '@utils/parseDate';
 import parsePrice from '@utils/parsePrice';
 
+import ICreateBillDTO from '@modules/bills/dtos/ICreateBillDTO';
 import Bill from '@modules/bills/infra/typeorm/entities/Bill';
 import IBillsRepository from '@modules/bills/repositories/IBillsRepository';
 
 interface IRequest {
   importFilename: string;
-}
-
-interface IBillExcel {
-  category: string;
-  spreadsheet_code: string;
-  fiscal_document: string;
-  service_description: string;
-  provider: string;
-  competence_date: Date;
-  payment_date: Date;
-  value: number;
 }
 
 const START_ROW_WITH_CONTENT = 5;
@@ -88,7 +78,7 @@ export default class ImportBillsService {
         return String(value);
       };
 
-      const billsFromExcel = rowsWithContent.map<IBillExcel>(row => {
+      const billsFromExcel = rowsWithContent.map<ICreateBillDTO>(row => {
         const spreadsheet_code = getCellValue(row, 2);
         const fiscal_document = getCellValue(row, 3);
         const service_description = getCellValue(row, 4);
@@ -98,6 +88,7 @@ export default class ImportBillsService {
         const value = getCellValue(row, 8);
 
         return {
+          spreadsheet_name: importFilename,
           category: worksheet.name,
           spreadsheet_code,
           fiscal_document,
@@ -106,7 +97,7 @@ export default class ImportBillsService {
           competence_date: parseDate(competence_date),
           payment_date: parseDate(payment_date),
           value: parsePrice(value),
-        } as IBillExcel;
+        } as ICreateBillDTO;
       });
 
       const createdBills = await this.billsRepository.createAll(billsFromExcel);

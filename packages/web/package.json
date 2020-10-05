@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "cross-env PUBLIC_URL='./' node scripts/build.js",
-    "start": "node scripts/start.js",
-    "test": "node scripts/test.js"
+    "start": "node scripts/start.js"
   },
   "browserslist": [
     ">0.2%",

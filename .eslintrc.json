@@ -130,6 +130,14 @@
         "ts": "never",
         "tsx": "never"
       }
+    ],
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "object": false
+        }
+      }
     ]
   },
   "settings": {

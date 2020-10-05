@@ -1,10 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateBills1600379760741 implements MigrationInterface {
+export default class CreateExpenseItems1601914927727
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'bills',
+        name: 'expense_items',
         columns: [
           {
             name: 'id',
@@ -18,37 +19,24 @@ export default class CreateBills1600379760741 implements MigrationInterface {
             type: 'varchar',
           },
           {
-            name: 'category',
+            name: 'collaborator',
             type: 'varchar',
           },
           {
-            name: 'spreadsheet_code',
+            name: 'role',
             type: 'varchar',
-          },
-          {
-            name: 'fiscal_document',
-            type: 'varchar',
-          },
-          {
-            name: 'service_description',
-            type: 'varchar',
-          },
-          {
-            name: 'provider',
-            type: 'varchar',
-          },
-          {
-            name: 'competence_date',
-            type: 'timestamp with time zone',
-            isNullable: true,
-          },
-          {
-            name: 'payment_date',
-            type: 'timestamp with time zone',
           },
           {
             name: 'value',
             type: 'decimal',
+          },
+          {
+            name: 'percentage',
+            type: 'decimal',
+          },
+          {
+            name: 'appropriation',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -66,6 +54,6 @@ export default class CreateBills1600379760741 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('bills');
+    await queryRunner.dropTable('expense_items');
   }
 }

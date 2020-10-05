@@ -1,12 +1,14 @@
 import { Router } from 'express';
 
 import billsRouter from '@modules/bills/infra/http/routes/bills.routes';
+import expensesRouter from '@modules/expenses/infra/http/routes/expenses.routes';
 import physicalsComparativesRouter from '@modules/physicals_comparatives/infra/http/routes/physicals_comparatives.routes';
 
 const routes = Router();
 
 routes.use('/bills', billsRouter);
 routes.use('/physicals-comparatives', physicalsComparativesRouter);
+routes.use('/expenses', expensesRouter);
 
 routes.get('/', (_request, response) => {
   return response.json({
