@@ -122,7 +122,6 @@ describe('ImportExpenses', () => {
     await expect(
       importExpenses.execute({
         importFilename: '',
-        worksheetId: 3,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -139,24 +138,6 @@ describe('ImportExpenses', () => {
     await expect(
       importExpenses.execute({
         importFilename: 'non-existing-file.any',
-        worksheetId: 3,
-      }),
-    ).rejects.toBeInstanceOf(AppError);
-  });
-
-  it('should not be able to import expenses with less than 3 worksheets', async () => {
-    jest.spyOn(path, 'join').mockImplementationOnce(() => {
-      return path.resolve(
-        __dirname,
-        TESTS_FILES_FOLDER,
-        TESTS_INVALID_IMPORT_FILENAME[0],
-      );
-    });
-
-    await expect(
-      importExpenses.execute({
-        importFilename: TESTS_INVALID_IMPORT_FILENAME[0],
-        worksheetId: 3,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -173,7 +154,6 @@ describe('ImportExpenses', () => {
     await expect(
       importExpenses.execute({
         importFilename: TESTS_INVALID_IMPORT_FILENAME[1],
-        worksheetId: 3,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

@@ -16,6 +16,8 @@ import PhysicalComparativeItemsRepository from '@modules/physicals_comparatives/
 import IPhysicalComparativeGroupingsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeGroupingsRepository';
 import IPhysicalComparativeHeadersRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeHeadersRepository';
 import IPhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeItemsRepository';
+import StockItemsRepository from '@modules/stock/infra/typeorm/repositories/StockItemsRepository';
+import IStockItemsRepository from '@modules/stock/repositories/IStockItemsRepository';
 
 container.registerSingleton<IBillsRepository>(
   'BillsRepository',
@@ -50,4 +52,9 @@ container.registerSingleton<IServantExpenseItemsRepository>(
 container.registerSingleton<IBricklayerExpenseItemsRepository>(
   'BricklayerExpenseItemsRepository',
   BricklayerExpenseItemsRepository,
+);
+
+container.registerSingleton<IStockItemsRepository>(
+  'StockItemsRepository',
+  StockItemsRepository,
 );

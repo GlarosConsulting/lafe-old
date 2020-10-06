@@ -20,7 +20,6 @@ import IServantExpenseItemsRepository from '@modules/expenses/repositories/IServ
 
 interface IRequest {
   importFilename: string;
-  worksheetId?: number;
 }
 
 interface IResponse {
@@ -52,10 +51,7 @@ export default class ImportExpensesService {
     private storageProvider: IStorageProvider,
   ) {}
 
-  public async execute({
-    importFilename,
-    worksheetId,
-  }: IRequest): Promise<IResponse> {
+  public async execute({ importFilename }: IRequest): Promise<IResponse> {
     const importFilePath = path.join(uploadConfig.tmpFolder, importFilename);
 
     if (!importFilename.length) {
@@ -71,13 +67,8 @@ export default class ImportExpensesService {
     const workbook = new Workbook();
     const readWorkbook = await workbook.xlsx.readFile(importFilePath);
 
-    if (worksheetId && readWorkbook.worksheets.length < worksheetId) {
-      throw new AppError('Invalid spreadsheet.');
-    }
-
-    const worksheet = readWorkbook.getWorksheet(
-      worksheetId || readWorkbook.worksheets.length - 2,
-    );
+    const worksheet =
+      readWorkbook.worksheets[readWorkbook.worksheets.length - 2];
 
     const titleCell = worksheet.getCell('B1');
 
