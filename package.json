@@ -67,7 +67,7 @@
     "eslint-plugin-react-hooks": "^4.0.5",
     "git-branch-is": "^4.0.0",
     "husky": "^4.3.0",
-    "jest": "^24.7.1",
+    "jest": "^26.5.2",
     "jest-dom": "^3.2.2",
     "lerna": "^3.22.1",
     "lint-staged": "^10.4.0",
