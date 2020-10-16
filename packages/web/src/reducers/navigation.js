@@ -6,23 +6,35 @@ import {
   CHANGE_ACTIVE_SIDEBAR_ITEM,
 } from '../actions/navigation';
 
-const initialState = {
+const INITIAL_STATE = {
   sidebarOpened: false,
   activeItem: window.location.pathname,
   sidebarPosition: 'left',
   sidebarVisibility: 'show',
 };
 
-export default function runtime(state = initialState, action) {
+export default function runtime(state = INITIAL_STATE, action) {
   switch (action.type) {
     case OPEN_SIDEBAR:
-      return { ...state, sidebarOpened: true };
+      return {
+        ...state,
+        sidebarOpened: true,
+      };
     case CLOSE_SIDEBAR:
-      return { ...state, sidebarOpened: false };
+      return {
+        ...state,
+        sidebarOpened: false,
+      };
     case CHANGE_SIDEBAR_POSITION:
-      return { ...state, sidebarPosition: action.payload };
+      return {
+        ...state,
+        sidebarPosition: action.payload,
+      };
     case CHANGE_SIDEBAR_VISIBILITY:
-      return { ...state, sidebarVisibility: action.payload };
+      return {
+        ...state,
+        sidebarVisibility: action.payload,
+      };
     case CHANGE_ACTIVE_SIDEBAR_ITEM:
       return {
         ...state,

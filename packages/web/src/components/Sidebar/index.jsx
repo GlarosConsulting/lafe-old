@@ -10,6 +10,7 @@ import { dismissAlert } from '../../actions/alerts';
 import { changeActiveSidebarItem } from '../../actions/navigation';
 import { logoutUser } from '../../actions/user';
 import logoImg from '../../images/logo.png';
+import hasRole from '../../utils/hasRole';
 import LinksGroup from './LinksGroup';
 import s from './Sidebar.module.scss';
 
@@ -17,7 +18,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.doLogout = this.doLogout.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentDidMount() {
@@ -56,14 +57,14 @@ class Sidebar extends React.Component {
     dispatch(dismissAlert(id));
   }
 
-  doLogout() {
+  handleLogout() {
     const { dispatch } = this.props;
 
     dispatch(logoutUser());
   }
 
   render() {
-    const { activeItem, dispatch } = this.props;
+    const { activeItem, user, dispatch } = this.props;
 
     return (
       <nav
@@ -79,17 +80,35 @@ class Sidebar extends React.Component {
         </header>
 
         <ul className={s.nav}>
+          <h5 className={[s.navTitle, s.groupTitle].join(' ')}>
+            ANÁLISE FÍSICA
+          </h5>
+
           <LinksGroup
             onActiveSidebarItemChange={item =>
               dispatch(changeActiveSidebarItem(item))
             }
             activeItem={activeItem}
-            header="Análise física macro"
+            header="Macro"
             isHeader
             iconName="flaticon-home"
-            link="/app/main"
+            link="/app/main/analise-fisica/macro"
             index="main"
           />
+
+          {hasRole('MANAGER', user) && (
+            <LinksGroup
+              onActiveSidebarItemChange={item =>
+                dispatch(changeActiveSidebarItem(item))
+              }
+              activeItem={activeItem}
+              header="Detalhada"
+              isHeader
+              iconName="flaticon-layers"
+              link="/app/main/analise-fisica/detalhada"
+              index="main"
+            />
+          )}
 
           {/* <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
 
@@ -174,6 +193,7 @@ function mapStateToProps(store) {
     sidebarOpened: store.navigation.sidebarOpened,
     alertsList: store.alerts.alertsList,
     activeItem: store.navigation.activeItem,
+    user: store.auth.user,
   };
 }
 

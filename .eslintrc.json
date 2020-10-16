@@ -52,6 +52,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-underscore-dangle": "off",
     "jsx-a11y/label-has-for": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-curly-newline": "off",
     "react/prop-types": "off",

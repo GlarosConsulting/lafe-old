@@ -265,7 +265,9 @@ class Header extends React.Component {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+
           <NavItem className={`${s.divider} text-white`} />
+
           <Dropdown
             nav
             isOpen={settingsOpen}
@@ -311,6 +313,7 @@ class Header extends React.Component {
               </ButtonGroup>
             </DropdownMenu>
           </Dropdown>
+
           <Dropdown
             nav
             isOpen={supportOpen}
@@ -364,6 +367,7 @@ class Header extends React.Component {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+
           <NavItem>
             <NavLink
               onClick={this.doLogout}
@@ -373,6 +377,7 @@ class Header extends React.Component {
               <i className="glyphicon glyphicon-off" />
             </NavLink>
           </NavItem>
+
           <NavItem className="d-md-none">
             <NavLink
               onClick={this.toggleSidebar}

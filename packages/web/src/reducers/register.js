@@ -13,11 +13,22 @@ export default function register(
 ) {
   switch (action.type) {
     case REGISTER_REQUEST:
-      return { ...state, isFetching: true };
+      return {
+        ...state,
+        isFetching: true,
+      };
     case REGISTER_SUCCESS:
-      return { ...state, isFetching: false, errorMessage: '' };
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: '',
+      };
     case REGISTER_FAILURE:
-      return { ...state, isFetching: false, errorMessage: action.payload };
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
+      };
     default:
       return state;
   }

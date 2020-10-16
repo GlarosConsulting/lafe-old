@@ -9,8 +9,9 @@ import Hammer from 'rc-hammerjs';
 import { openSidebar, closeSidebar } from '../../actions/navigation';
 import Charts from '../../pages/components/charts/Charts';
 import UIIcons from '../../pages/components/icons';
-import Dashboard from '../../pages/dashboard';
 import UINotifications from '../../pages/notifications';
+import PhysicalAnalysisDetailedDashboard from '../../pages/physical-analysis/detailed-dashboard';
+import PhysicalAnalysisMacroDashboard from '../../pages/physical-analysis/macro-dashboard';
 import TablesStatic from '../../pages/tables/static';
 import CoreTypography from '../../pages/typography';
 import BreadcrumbHistory from '../BreadcrumbHistory';
@@ -73,14 +74,20 @@ class Layout extends React.Component {
                       path="/app/main"
                       exact
                       render={() => (
-                        <Redirect to="/app/main/analise-fisica-macro" />
+                        <Redirect to="/app/main/analise-fisica/macro" />
                       )}
                     />
 
                     <Route
-                      path="/app/main/analise-fisica-macro"
+                      path="/app/main/analise-fisica/macro"
                       exact
-                      component={Dashboard}
+                      component={PhysicalAnalysisMacroDashboard}
+                    />
+
+                    <Route
+                      path="/app/main/analise-fisica/detalhada"
+                      exact
+                      component={PhysicalAnalysisDetailedDashboard}
                     />
 
                     <Route path="/app/icons" exact component={UIIcons} />

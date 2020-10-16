@@ -5,9 +5,10 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
-export function receiveLogin() {
+export function receiveLogin(payload) {
   return {
     type: LOGIN_SUCCESS,
+    payload,
   };
 }
 
@@ -41,11 +42,11 @@ export function logoutUser() {
 export function loginUser(credentials, history) {
   return async dispatch => {
     try {
-      await api.post('/sessions', credentials);
+      const response = await api.post('/sessions', credentials);
 
-      dispatch(receiveLogin());
+      const { user } = response.data;
 
-      localStorage.setItem('authenticated', true);
+      dispatch(receiveLogin(user));
 
       history.push('/app');
     } catch {

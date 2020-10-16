@@ -8,7 +8,7 @@ import {
 
 import User from './User';
 
-export type Role = 'admin' | 'manager' | 'moderator' | 'vip';
+export type Role = 'manager' | 'employee';
 
 @Entity('user_roles')
 export default class UserRole {

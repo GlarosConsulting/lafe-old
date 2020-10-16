@@ -21,7 +21,7 @@ export default class CreateUserRoles1597551089197
           {
             name: 'role',
             type: 'enum',
-            enum: ['admin', 'manager', 'moderator', 'vip'],
+            enum: ['manager', 'employee'],
             enumName: 'roleEnum',
           },
         ],

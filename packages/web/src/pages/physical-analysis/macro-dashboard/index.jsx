@@ -1,60 +1,95 @@
 import React from 'react';
-// import AnimateNumber from 'react-animated-number';
 import ApexChart from 'react-apexcharts';
-import { Row, Table, Input, Label, Badge, Col } from 'reactstrap';
+import {
+  Row,
+  Table,
+  Input,
+  Label,
+  Badge,
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 
 import ReactEchartsCore from 'echarts-for-react/lib/core';
 import echarts from 'echarts/lib/echarts'; // eslint-disable-line import-helpers/order-imports
 
-import Widget from '../../components/Widget';
-import s from './Dashboard.module.scss';
+import Widget from '../../../components/Widget';
+import s from './MacroDashboard.module.scss';
 import { charts_data } from './mock';
 
-class Dashboard extends React.Component {
+class MacroDashboard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.checkTable = this.checkTable.bind(this);
+    this.state = {
+      isConstructionDropdownOpen: false,
+      activeConstruction: {
+        id: 'obra-20',
+        label: 'Obra 20',
+      },
+    };
   }
 
-  checkTable(id) {
-    const { checkedArr } = this.state;
+  handleToggleConstructionDropdown = () => {
+    const { isConstructionDropdownOpen } = this.state;
 
-    let arr = [];
+    this.setState({ isConstructionDropdownOpen: !isConstructionDropdownOpen });
+  };
 
-    if (id === 0) {
-      const val = !checkedArr[0];
-
-      for (let i = 0; i < checkedArr.length; i += 1) {
-        arr[i] = val;
-      }
-    } else {
-      arr = checkedArr;
-      arr[id] = !arr[id];
-    }
-    if (arr[0]) {
-      let count = 1;
-
-      for (let i = 1; i < arr.length; i += 1) {
-        if (arr[i]) {
-          count += 1;
-        }
-      }
-
-      if (count !== arr.length) {
-        arr[0] = !arr[0];
-      }
-    }
-
+  handleChangeActiveConstruction = ({ id, label }) => {
     this.setState({
-      checkedArr: arr,
+      activeConstruction: {
+        id,
+        label,
+      },
     });
-  }
+  };
+
+  getActiveConstruction = () => {
+    const { activeConstruction } = this.state;
+
+    return charts_data.find(item => item.id === activeConstruction.id);
+  };
 
   render() {
+    const { isConstructionDropdownOpen } = this.state;
+
+    const activeConstruction = this.getActiveConstruction();
+
     return (
       <div className={s.root}>
-        <h1 className="page-title">Análise física macro</h1>
+        <div className="page-title d-flex align-items-center">
+          <h1 className="mr-4">Análise física - Macro</h1>
+
+          <Dropdown
+            isOpen={isConstructionDropdownOpen}
+            toggle={this.handleToggleConstructionDropdown}
+          >
+            <DropdownToggle
+              className={`${s.constructionDropdownToggle} text-white`}
+            >
+              <span>{activeConstruction.label}</span>
+              <i className="glyphicon glyphicon-chevron-down" />
+            </DropdownToggle>
+
+            <DropdownMenu
+              right
+              className={`${s.constructionDropdownMenu} ${s.support}`}
+            >
+              {charts_data.map(item => (
+                <DropdownItem
+                  active={item.id === activeConstruction.id}
+                  onClick={() => this.handleChangeActiveConstruction(item)}
+                >
+                  {item.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
 
         <Row>
           <Col lg={6} xs={12}>
@@ -69,8 +104,10 @@ class Dashboard extends React.Component {
             >
               <ApexChart
                 type="bar"
-                series={charts_data.direct_expenses.columns.series}
-                options={charts_data.direct_expenses.columns.options}
+                series={activeConstruction.data.direct_expenses.columns.series}
+                options={
+                  activeConstruction.data.direct_expenses.columns.options
+                }
                 height={350}
               />
             </Widget>
@@ -88,7 +125,7 @@ class Dashboard extends React.Component {
             >
               <ReactEchartsCore
                 echarts={echarts}
-                option={charts_data.direct_expenses.lines}
+                option={activeConstruction.data.direct_expenses.lines}
                 opts={{
                   renderer: 'canvas',
                 }}
@@ -111,8 +148,8 @@ class Dashboard extends React.Component {
             >
               <ApexChart
                 type="bar"
-                series={charts_data.total_expenses.columns.series}
-                options={charts_data.total_expenses.columns.options}
+                series={activeConstruction.data.total_expenses.columns.series}
+                options={activeConstruction.data.total_expenses.columns.options}
                 height={350}
               />
             </Widget>
@@ -130,7 +167,7 @@ class Dashboard extends React.Component {
             >
               <ReactEchartsCore
                 echarts={echarts}
-                option={charts_data.total_expenses.lines}
+                option={activeConstruction.data.total_expenses.lines}
                 opts={{
                   renderer: 'canvas',
                 }}
@@ -416,4 +453,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default MacroDashboard;

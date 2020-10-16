@@ -19,10 +19,6 @@ import { loginUser } from '../../actions/user';
 import Widget from '../../components/Widget';
 
 class Login extends React.Component {
-  static isAuthenticated(token) {
-    return !!token;
-  }
-
   constructor(props) {
     super(props);
 
@@ -61,16 +57,14 @@ class Login extends React.Component {
   }
 
   render() {
-    const { location, isFetching, errorMessage } = this.props;
+    const { location, isAuthenticated, isFetching, errorMessage } = this.props;
     const { email, password } = this.state;
 
     const { from } = location.state || {
       from: { pathname: '/app' },
     };
 
-    if (
-      Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))
-    ) {
+    if (isAuthenticated) {
       return <Redirect to={from} />;
     }
 

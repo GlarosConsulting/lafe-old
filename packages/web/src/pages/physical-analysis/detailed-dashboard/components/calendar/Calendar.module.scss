@@ -1,4 +1,4 @@
-@import '../../../../styles/app';
+@import '../../../../../styles/app';
 
 .calendarRectangle {
   width: 100%;
@@ -47,7 +47,7 @@
       .headerText {
         flex: 5;
         display: flex;
-        
+
         .todayLabel {
           flex: 1;
           font-size: 0.8em;
@@ -92,7 +92,7 @@
       height: 15%;
     }
   }
-} 
+}
 
 
 .calendarItemContainer {
