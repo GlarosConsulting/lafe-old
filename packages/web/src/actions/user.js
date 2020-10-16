@@ -1,3 +1,5 @@
+import api from '../services/api';
+
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
@@ -36,14 +38,18 @@ export function logoutUser() {
   };
 }
 
-export function loginUser(creds) {
-  return dispatch => {
-    dispatch(receiveLogin());
+export function loginUser(credentials, history) {
+  return async dispatch => {
+    try {
+      await api.post('/sessions', credentials);
 
-    if (creds.email.length > 0 && creds.password.length > 0) {
+      dispatch(receiveLogin());
+
       localStorage.setItem('authenticated', true);
-    } else {
-      dispatch(loginError('Something was wrong. Try again'));
+
+      history.push('/app');
+    } catch {
+      dispatch(loginError('E-mail ou senha incorretos.'));
     }
   };
 }

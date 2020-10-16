@@ -1,3 +1,5 @@
+import '@modules/users/providers';
+
 import './StorageProvider';
 import './MailTemplateProvider';
 import './MailProvider';
