@@ -27,6 +27,7 @@
     ]
   },
   "scripts": {
+    "heroku-postbuild": "yarn server build",
     "lint": "eslint packages --ext ts,tsx",
     "lint:fix": "yarn lint --fix",
     "test": "lerna run test --scope @lafe/* --stream --parallel -- --watchAll false",
