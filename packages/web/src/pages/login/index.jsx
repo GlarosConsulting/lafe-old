@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect, Link } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import {
   Container,
   Alert,
@@ -17,61 +17,54 @@ import PropTypes from 'prop-types';
 
 import { loginUser } from '../../actions/user';
 import Widget from '../../components/Widget';
-import microsoft from '../../images/microsoft.png';
 
 class Login extends React.Component {
-  static isAuthenticated(token) {
-    return !!token;
-  }
-
   constructor(props) {
     super(props);
 
     this.state = {
-      email: 'admin@flatlogic.com',
-      password: 'password',
+      email: '',
+      password: '',
     };
 
-    this.doLogin = this.doLogin.bind(this);
-    this.changeEmail = this.changeEmail.bind(this);
-    this.changePassword = this.changePassword.bind(this);
-    this.signUp = this.signUp.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGoToSignUp = this.handleGoToSignUp.bind(this);
   }
 
-  changeEmail(event) {
+  handleChangeEmail(event) {
     this.setState({ email: event.target.value });
   }
 
-  changePassword(event) {
+  handleChangePassword(event) {
     this.setState({ password: event.target.value });
   }
 
-  doLogin(e) {
+  async handleSubmit(e) {
     e.preventDefault();
 
-    const { dispatch } = this.props;
+    const { dispatch, history } = this.props;
     const { email, password } = this.state;
 
-    dispatch(loginUser({ email, password }));
+    await dispatch(loginUser({ email, password }, history));
   }
 
-  signUp() {
+  handleGoToSignUp() {
     const { history } = this.props;
 
     history.push('/register');
   }
 
   render() {
-    const { location, isFetching, errorMessage } = this.props;
+    const { location, isAuthenticated, isFetching, errorMessage } = this.props;
     const { email, password } = this.state;
 
     const { from } = location.state || {
       from: { pathname: '/app' },
     };
 
-    if (
-      Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))
-    ) {
+    if (isAuthenticated) {
       return <Redirect to={from} />;
     }
 
@@ -80,13 +73,16 @@ class Login extends React.Component {
         <Container>
           <Widget
             className="widget-auth mx-auto"
-            title={<h3 className="mt-0">Login to your Web App</h3>}
+            title={<h3 className="mt-0">Login</h3>}
           >
-            <p className="widget-auth-info">Use your email to sign in.</p>
-            <form onSubmit={this.doLogin}>
+            <p className="widget-auth-info">
+              Use seu e-mail para fazer o login
+            </p>
+
+            <form onSubmit={this.handleSubmit}>
               {errorMessage && (
                 <Alert
-                  className="alert-sm widget-middle-overflow rounded-0"
+                  className="alert-sm widget-middle-overflow rounded-0 mt-3"
                   color="danger"
                 >
                   {errorMessage}
@@ -94,7 +90,7 @@ class Login extends React.Component {
               )}
 
               <FormGroup className="mt">
-                <Label for="email">Email</Label>
+                <Label for="email">E-mail</Label>
 
                 <InputGroup className="input-group-no-border">
                   <InputGroupAddon addonType="prepend">
@@ -107,7 +103,7 @@ class Login extends React.Component {
                     id="email"
                     className="input-transparent pl-3"
                     value={email}
-                    onChange={this.changeEmail}
+                    onChange={this.handleChangeEmail}
                     type="email"
                     required
                     name="email"
@@ -130,7 +126,7 @@ class Login extends React.Component {
                     id="password"
                     className="input-transparent pl-3"
                     value={password}
-                    onChange={this.changePassword}
+                    onChange={this.handleChangePassword}
                     type="password"
                     required
                     name="password"
@@ -139,7 +135,7 @@ class Login extends React.Component {
                 </InputGroup>
               </FormGroup>
 
-              <div className="bg-widget auth-widget-footer">
+              <div className="bg-widget auth-widget-footer mb-3">
                 <Button
                   type="submit"
                   color="danger"
@@ -152,39 +148,13 @@ class Login extends React.Component {
                   </span>
                   {isFetching ? 'Loading...' : 'Login'}
                 </Button>
-
-                <p className="widget-auth-info mt-4">
-                  {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
-                  {"Don't have an account? Sign up now!"}
-                </p>
-
-                <Link className="d-block text-center mb-4" to="register">
-                  Create an Account
-                </Link>
-
-                <div className="social-buttons">
-                  <Button color="primary" className="social-button">
-                    <i className="social-icon social-google" />
-                    <p className="social-text">GOOGLE</p>
-                  </Button>
-
-                  <Button color="success" className="social-button">
-                    <i
-                      className="social-icon social-microsoft"
-                      style={{ backgroundImage: `url(${microsoft})` }}
-                    />
-                    <p className="social-text" style={{ color: '#fff' }}>
-                      MICROSOFT
-                    </p>
-                  </Button>
-                </div>
               </div>
             </form>
           </Widget>
         </Container>
 
         <footer className="auth-footer">
-          2020 &copy; Light Blue Template - React Admin Dashboard Template.
+          2020 &copy; Lafe - Glaros Comércio e Assessoria
         </footer>
       </div>
     );

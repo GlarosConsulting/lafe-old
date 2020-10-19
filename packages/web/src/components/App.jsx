@@ -11,10 +11,8 @@ import Login from '../pages/login';
 import Register from '../pages/register';
 import LayoutComponent from './Layout';
 
-const PrivateRoute = ({ dispatch, component, ...rest }) => {
-  if (
-    !Login.isAuthenticated(JSON.parse(localStorage.getItem('authenticated')))
-  ) {
+const PrivateRoute = ({ isAuthenticated, dispatch, component, ...rest }) => {
+  if (!isAuthenticated) {
     dispatch(logoutUser());
 
     return <Redirect to="/login" />;
@@ -38,7 +36,7 @@ const CloseButton = ({ closeToast }) => (
 
 class App extends React.PureComponent {
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, isAuthenticated } = this.props;
 
     return (
       <div>
@@ -50,26 +48,27 @@ class App extends React.PureComponent {
 
         <HashRouter>
           <Switch>
-            <Route path="/" exact render={() => <Redirect to="/app/main" />} />
+            <Route exact path="/" render={() => <Redirect to="/app/main" />} />
             <Route
-              path="/app"
               exact
+              path="/app"
               render={() => <Redirect to="/app/main" />}
             />
 
             <PrivateRoute
               path="/app"
+              isAuthenticated={isAuthenticated}
               dispatch={dispatch}
               component={LayoutComponent}
             />
 
-            <Route path="/register" exact component={Register} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/error" exact component={ErrorPage} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/error" component={ErrorPage} />
 
             <Route component={ErrorPage} />
 
-            <Redirect from="*" to="/app/main/analise-fisica-macro" />
+            <Redirect from="*" to="/app/main/analise-fisica/macro" />
           </Switch>
         </HashRouter>
       </div>

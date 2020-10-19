@@ -18,6 +18,20 @@ import IPhysicalComparativeHeadersRepository from '@modules/physicals_comparativ
 import IPhysicalComparativeItemsRepository from '@modules/physicals_comparatives/repositories/IPhysicalComparativeItemsRepository';
 import StockItemsRepository from '@modules/stock/infra/typeorm/repositories/StockItemsRepository';
 import IStockItemsRepository from '@modules/stock/repositories/IStockItemsRepository';
+import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+
+container.registerSingleton<IUsersRepository>(
+  'UsersRepository',
+  UsersRepository,
+);
+
+container.registerSingleton<IUserTokensRepository>(
+  'UserTokensRepository',
+  UserTokensRepository,
+);
 
 container.registerSingleton<IBillsRepository>(
   'BillsRepository',

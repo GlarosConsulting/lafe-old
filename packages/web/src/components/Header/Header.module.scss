@@ -27,7 +27,7 @@
       @media (max-width: breakpoint-max(sm)) {
         display: none !important;
       }
-    
+
       button.close {
         color: #f8f8f8;
         font-weight: bold;
@@ -308,7 +308,7 @@
 
 .notificationsMenu {
   > a {
-    background-color: transparent!important;    
+    background-color: transparent!important;
   }
 
   :global .dropdown-menu {

@@ -142,7 +142,7 @@ class Header extends React.Component {
       messagesOpen,
       supportOpen,
     } = this.state;
-    const { sidebarPosition, sidebarVisibility } = this.props;
+    const { sidebarPosition, sidebarVisibility, user } = this.props;
 
     return (
       <Navbar className={`d-print-none ${s.root}`}>
@@ -201,7 +201,7 @@ class Header extends React.Component {
               >
                 <img src={avatar} alt="..." />
               </span>
-              <span className={`small ${s.accountCheck}`}>Philip smith</span>
+              <span className={`small ${s.accountCheck}`}>{user.name}</span>
               <Badge className={s.badge} color="primary">
                 13
               </Badge>
@@ -265,7 +265,9 @@ class Header extends React.Component {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+
           <NavItem className={`${s.divider} text-white`} />
+
           <Dropdown
             nav
             isOpen={settingsOpen}
@@ -311,6 +313,7 @@ class Header extends React.Component {
               </ButtonGroup>
             </DropdownMenu>
           </Dropdown>
+
           <Dropdown
             nav
             isOpen={supportOpen}
@@ -364,6 +367,7 @@ class Header extends React.Component {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+
           <NavItem>
             <NavLink
               onClick={this.doLogout}
@@ -373,6 +377,7 @@ class Header extends React.Component {
               <i className="glyphicon glyphicon-off" />
             </NavLink>
           </NavItem>
+
           <NavItem className="d-md-none">
             <NavLink
               onClick={this.toggleSidebar}
@@ -398,6 +403,7 @@ function mapStateToProps(store) {
     isSidebarOpened: store.navigation.sidebarOpened,
     sidebarVisibility: store.navigation.sidebarVisibility,
     sidebarPosition: store.navigation.sidebarPosition,
+    user: store.auth.user,
   };
 }
 

@@ -1,6 +1,6 @@
 import { DISMISS_ALERT } from '../actions/alerts';
 
-const defaultState = {
+const INITIAL_STATE = {
   alertsList: [
     {
       id: 0,
@@ -19,7 +19,7 @@ const defaultState = {
   ],
 };
 
-export default function alertsReducer(state = defaultState, action) {
+export default function alertsReducer(state = INITIAL_STATE, action) {
   let index;
   switch (action.type) {
     case DISMISS_ALERT:
