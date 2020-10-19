@@ -17,7 +17,7 @@ import AppError from '@shared/errors/AppError';
 import uploadConfig from '@config/upload';
 
 import WebSocket from '../websocket/server';
-import rateLimiter from './middlewares/rateLimiter';
+// import rateLimiter from './middlewares/rateLimiter';
 import routes from './routes';
 
 const app = express();
@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/files', express.static(uploadConfig.uploadsFolder));
-app.use(rateLimiter);
+// app.use(rateLimiter);
 app.use(routes);
 
 app.use(errors());
