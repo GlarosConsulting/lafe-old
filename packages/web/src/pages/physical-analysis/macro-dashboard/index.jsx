@@ -27,8 +27,8 @@ class MacroDashboard extends React.Component {
     this.state = {
       isConstructionDropdownOpen: false,
       activeConstruction: {
-        id: 'obra-20',
-        label: 'Obra 20',
+        id: 'obra-33',
+        label: 'Obra 33',
       },
     };
   }

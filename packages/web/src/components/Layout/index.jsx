@@ -27,21 +27,14 @@ class Layout extends React.Component {
   }
 
   handleSwipe(e) {
-    const { chatOpen } = this.state;
     const { dispatch, sidebarOpened } = this.props;
 
     if ('ontouchstart' in window) {
-      if (e.direction === 4 && !chatOpen) {
+      if (e.direction === 4) {
         dispatch(openSidebar());
-        return;
-      }
-
-      if (e.direction === 2 && sidebarOpened) {
+      } else if (e.direction === 2 && sidebarOpened) {
         dispatch(closeSidebar());
-        return;
       }
-
-      this.setState({ chatOpen: e.direction === 2 });
     }
   }
 

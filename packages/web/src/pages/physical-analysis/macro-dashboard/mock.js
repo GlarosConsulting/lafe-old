@@ -6,8 +6,8 @@ const lineColors = [colors.blue, colors.green, colors.orange];
 
 export const charts_data = [
   {
-    id: 'obra-20',
-    label: 'Obra 20',
+    id: 'obra-33',
+    label: 'Obra 33',
     data: {
       direct_expenses: {
         columns: {
