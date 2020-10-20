@@ -1,5 +1,13 @@
 import React from 'react';
-import { Row, Table, Col } from 'reactstrap';
+import {
+  Row,
+  Table,
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 
 import Widget from '../../../components/Widget';
 import formatPercentage from '../../../utils/formatPercentage';
@@ -10,12 +18,73 @@ import { table_data } from './mock';
 class DetailedDashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      isConstructionDropdownOpen: false,
+      activeConstruction: {
+        id: 'obra-33',
+        label: 'Obra 33',
+      },
+    };
   }
 
+  handleToggleConstructionDropdown = () => {
+    const { isConstructionDropdownOpen } = this.state;
+
+    this.setState({ isConstructionDropdownOpen: !isConstructionDropdownOpen });
+  };
+
+  handleChangeActiveConstruction = ({ id, label }) => {
+    this.setState({
+      activeConstruction: {
+        id,
+        label,
+      },
+    });
+  };
+
+  getActiveConstruction = () => {
+    const { activeConstruction } = this.state;
+
+    return table_data.find(item => item.id === activeConstruction.id);
+  };
+
   render() {
+    const { isConstructionDropdownOpen } = this.state;
+
+    const activeConstruction = this.getActiveConstruction();
+
     return (
       <div className={s.root}>
-        <h1 className="page-title">Análise física - Detalhada</h1>
+        <div className="page-title d-flex align-items-center">
+          <h1 className="mr-4">Análise física - Detalhada</h1>
+
+          <Dropdown
+            isOpen={isConstructionDropdownOpen}
+            toggle={this.handleToggleConstructionDropdown}
+          >
+            <DropdownToggle
+              className={`${s.constructionDropdownToggle} text-white`}
+            >
+              <span>{activeConstruction.label}</span>
+              <i className="glyphicon glyphicon-chevron-down" />
+            </DropdownToggle>
+
+            <DropdownMenu
+              right
+              className={`${s.constructionDropdownMenu} ${s.support}`}
+            >
+              {table_data.map(item => (
+                <DropdownItem
+                  active={item.id === activeConstruction.id}
+                  onClick={() => this.handleChangeActiveConstruction(item)}
+                >
+                  {item.label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
 
         <Row>
           <Col lg={12}>
@@ -41,7 +110,7 @@ class DetailedDashboard extends React.Component {
                 </thead>
 
                 <tbody>
-                  {table_data.map(row => (
+                  {activeConstruction.data.map(row => (
                     <tr>
                       <td>{row.description}</td>
                       <td>{row.un}</td>
@@ -81,7 +150,7 @@ class DetailedDashboard extends React.Component {
                 </thead>
 
                 <tbody>
-                  {table_data.map(row => (
+                  {activeConstruction.data.map(row => (
                     <tr>
                       <td>{row.description}</td>
                       <td>{row.un}</td>
@@ -128,7 +197,7 @@ class DetailedDashboard extends React.Component {
                 </thead>
 
                 <tbody>
-                  {table_data.map(row => (
+                  {activeConstruction.data.map(row => (
                     <tr>
                       <td>{row.description}</td>
                       <td>{row.un}</td>
@@ -176,7 +245,7 @@ class DetailedDashboard extends React.Component {
                 </thead>
 
                 <tbody>
-                  {table_data.map(row => (
+                  {activeConstruction.data.map(row => (
                     <tr>
                       <td>{row.description}</td>
                       <td>{row.un}</td>
