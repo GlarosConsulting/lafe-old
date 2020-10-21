@@ -12,10 +12,10 @@ import {
 import Widget from '../../../components/Widget';
 import formatPercentage from '../../../utils/formatPercentage';
 import formatValue from '../../../utils/formatValue';
-import s from './DetailedDashboard.module.scss';
+import s from './Detailed.module.scss';
 import { table_data } from './mock';
 
-class DetailedDashboard extends React.Component {
+class Detailed extends React.Component {
   constructor(props) {
     super(props);
 
@@ -289,4 +289,4 @@ class DetailedDashboard extends React.Component {
   }
 }
 
-export default DetailedDashboard;
+export default Detailed;

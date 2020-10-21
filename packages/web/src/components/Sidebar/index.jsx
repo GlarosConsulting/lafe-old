@@ -92,7 +92,7 @@ class Sidebar extends React.Component {
             header="Macro"
             isHeader
             iconName="flaticon-home"
-            link="/app/main/analise-fisica/macro"
+            link="/app/analise-fisica/macro"
             index="main"
           />
 
@@ -105,26 +105,26 @@ class Sidebar extends React.Component {
               header="Detalhada"
               isHeader
               iconName="flaticon-layers"
-              link="/app/main/analise-fisica/detalhada"
+              link="/app/analise-fisica/detalhada"
               index="main"
             />
           )}
 
-          {/* <h5 className={[s.navTitle, s.groupTitle].join(' ')}>TEMPLATE</h5>
+          <div style={{ marginTop: 16 }} />
 
           <LinksGroup
             onActiveSidebarItemChange={item =>
               dispatch(changeActiveSidebarItem(item))
             }
             activeItem={activeItem}
-            header="Typography"
+            header="Principais impactos do mes"
             isHeader
             iconName="flaticon-network"
-            link="/app/typography"
-            index="core"
+            link="/app/principais-impactos-mes"
+            index="main"
           />
 
-          <LinksGroup
+          {/* <LinksGroup
             onActiveSidebarItemChange={item =>
               dispatch(changeActiveSidebarItem(item))
             }
