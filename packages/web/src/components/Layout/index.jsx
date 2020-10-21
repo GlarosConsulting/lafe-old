@@ -10,8 +10,9 @@ import { openSidebar, closeSidebar } from '../../actions/navigation';
 import Charts from '../../pages/components/charts/Charts';
 import UIIcons from '../../pages/components/icons';
 import UINotifications from '../../pages/notifications';
-import PhysicalAnalysisDetailedDashboard from '../../pages/physical-analysis/detailed-dashboard';
+import PhysicalAnalysisDetailed from '../../pages/physical-analysis/detailed';
 import PhysicalAnalysisMacroDashboard from '../../pages/physical-analysis/macro-dashboard';
+import MainMonthImpacts from '../../pages/physical-analysis/main-month-impacts';
 import TablesStatic from '../../pages/tables/static';
 import CoreTypography from '../../pages/typography';
 import BreadcrumbHistory from '../BreadcrumbHistory';
@@ -64,23 +65,27 @@ class Layout extends React.Component {
                 >
                   <Switch>
                     <Route
-                      path="/app/main"
+                      path="/app"
                       exact
-                      render={() => (
-                        <Redirect to="/app/main/analise-fisica/macro" />
-                      )}
+                      render={() => <Redirect to="/app/analise-fisica/macro" />}
                     />
 
                     <Route
-                      path="/app/main/analise-fisica/macro"
+                      path="/app/analise-fisica/macro"
                       exact
                       component={PhysicalAnalysisMacroDashboard}
                     />
 
                     <Route
-                      path="/app/main/analise-fisica/detalhada"
+                      path="/app/analise-fisica/detalhada"
                       exact
-                      component={PhysicalAnalysisDetailedDashboard}
+                      component={PhysicalAnalysisDetailed}
+                    />
+
+                    <Route
+                      path="/app/principais-impactos-mes"
+                      exact
+                      component={MainMonthImpacts}
                     />
 
                     <Route path="/app/icons" exact component={UIIcons} />
