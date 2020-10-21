@@ -12,7 +12,8 @@ import UIIcons from '../../pages/components/icons';
 import UINotifications from '../../pages/notifications';
 import PhysicalAnalysisDetailed from '../../pages/physical-analysis/detailed';
 import PhysicalAnalysisMacroDashboard from '../../pages/physical-analysis/macro-dashboard';
-import MainMonthImpacts from '../../pages/physical-analysis/main-month-impacts';
+import PhysicalAnalysisMainMonthImpacts from '../../pages/physical-analysis/main-month-impacts';
+import PhysicalAnalysisManagementReport from '../../pages/physical-analysis/management-report';
 import TablesStatic from '../../pages/tables/static';
 import CoreTypography from '../../pages/typography';
 import BreadcrumbHistory from '../BreadcrumbHistory';
@@ -85,7 +86,13 @@ class Layout extends React.Component {
                     <Route
                       path="/app/principais-impactos-mes"
                       exact
-                      component={MainMonthImpacts}
+                      component={PhysicalAnalysisMainMonthImpacts}
+                    />
+
+                    <Route
+                      path="/app/relatorio-gerencial"
+                      exact
+                      component={PhysicalAnalysisManagementReport}
                     />
 
                     <Route path="/app/icons" exact component={UIIcons} />

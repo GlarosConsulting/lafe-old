@@ -124,19 +124,19 @@ class Sidebar extends React.Component {
             index="main"
           />
 
-          {/* <LinksGroup
+          <LinksGroup
             onActiveSidebarItemChange={item =>
               dispatch(changeActiveSidebarItem(item))
             }
             activeItem={activeItem}
-            header="Tables Basic"
+            header="Relatório gerencial"
             isHeader
             iconName="flaticon-map-location"
-            link="/app/tables"
-            index="tables"
+            link="/app/relatorio-gerencial"
+            index="main"
           />
 
-          <LinksGroup
+          {/* <LinksGroup
             onActiveSidebarItemChange={item =>
               dispatch(changeActiveSidebarItem(item))
             }
