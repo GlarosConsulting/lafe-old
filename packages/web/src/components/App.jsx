@@ -48,12 +48,7 @@ class App extends React.PureComponent {
 
         <HashRouter>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/app/main" />} />
-            <Route
-              exact
-              path="/app"
-              render={() => <Redirect to="/app/main" />}
-            />
+            <Route exact path="/" render={() => <Redirect to="/app" />} />
 
             <PrivateRoute
               path="/app"
