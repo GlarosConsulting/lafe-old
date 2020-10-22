@@ -2,464 +2,328 @@ import config from './config';
 
 const colors = config.chartColors;
 
-const lineColors = [colors.blue, colors.green, colors.orange];
+const LINE_COLORS = [colors.red, colors.blue, colors.orange];
 
-export const charts_data = [
+export const DATA = [
   {
     id: 'obra-33',
     label: 'Obra 33',
     data: {
-      direct_expenses: {
-        columns: {
-          series: [
-            {
-              name: 'Atrasadas',
-              data: [44, 55, 57, 56, 51, 48, 30, 21, 0],
-            },
-            {
-              name: 'Adiantadas',
-              data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-            },
-          ],
-          options: {
-            chart: {
-              type: 'bar',
-              height: 350,
-              background: 'transparent',
-              foreColor: '#999',
-            },
-            theme: {
-              mode: 'dark',
-              palette: 'palette1',
-            },
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded',
-              },
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              show: true,
-              width: 2,
-              colors: ['transparent'],
-            },
-            xaxis: {
-              categories: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            fill: {
-              opacity: 1,
-            },
-            tooltip: {
-              y: {
-                formatter(val) {
-                  return `$ ${val} thousands`;
-                },
-              },
+      table: {
+        direct_expenses: [
+          {
+            item_id: 1,
+            description: 'PROJETOS',
+            measured_percentage: 0.9955,
+            budget_value: 292608.87,
+            weight_percentage: 0.292,
+            accumulated_values: {
+              measured: 291302.89,
+              payments: 310798.7,
+              budget: -18189.83,
+              projection: 309836.92,
             },
           },
-        },
-        lines: {
-          color: lineColors,
+        ],
+        indirect_expenses: [
+          {
+            item_id: 1,
+            description: 'LICENÇAS, TAXAS E EMOLUMENTOS',
+            measured_percentage: 0.534,
+            budget_value: 153772.67,
+            weight_percentage: 0.153,
+            accumulated_values: {
+              measured: 82114.95,
+              payments: 75697.53,
+              budget: 78075.14,
+              projection: 144555.16,
+            },
+          },
+        ],
+      },
+      monthly_evolution: {
+        series: [
+          {
+            name: 'Atrasadas',
+            data: [
+              26,
+              65,
+              44,
+              55,
+              57,
+              56,
+              51,
+              48,
+              30,
+              21,
+              0,
+              56,
+              49,
+              56,
+              49,
+              78,
+              56,
+              0,
+              0,
+              0,
+            ],
+          },
+          {
+            name: 'Adiantadas',
+            data: [
+              23,
+              35,
+              76,
+              85,
+              101,
+              98,
+              87,
+              105,
+              91,
+              114,
+              94,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+            ],
+          },
+        ],
+        options: {
+          chart: {
+            type: 'bar',
+            height: 350,
+            background: 'transparent',
+            foreColor: '#999',
+          },
+          theme: {
+            mode: 'dark',
+            palette: 'palette7',
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: '55%',
+              endingShape: 'rounded',
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent'],
+          },
+          xaxis: {
+            categories: [
+              'Nov-19',
+              'Dez-19',
+              'Jan-20',
+              'Fev-20',
+              'Mar-20',
+              'Abr-20',
+              'Mai-20',
+              'Jun-20',
+              'Jul-20',
+              'Ago-20',
+              'Set-20',
+              'Out-20',
+              'Nov-20',
+              'Dez-20',
+              'Jan-21',
+              'Fev-21',
+              'Mar-21',
+              'Abr-21',
+              'Mai-21',
+              'Jun-21',
+              'Jul-21',
+            ],
+          },
+          fill: {
+            opacity: 1,
+          },
           tooltip: {
-            trigger: 'none',
-            axisPointer: {
-              type: 'cross',
+            y: {
+              formatter(val) {
+                return `$ ${val} thousands`;
+              },
             },
           },
-          legend: {
-            data: ['2015 Precipitation', '2016 Precipitation'],
-            textStyle: {
-              color: colors.textColor,
-            },
-          },
-          grid: {
-            top: 70,
-            bottom: 50,
-          },
-          xAxis: [
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Adiantadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Atrasadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-          ],
-          yAxis: [
-            {
-              type: 'value',
-              axisLabel: {
-                color: '#999',
-              },
-              axisLine: {
-                lineStyle: {
-                  color: colors.textColor,
-                },
-              },
-              splitLine: {
-                lineStyle: {
-                  color: colors.gridLineColor,
-                },
-              },
-              axisPointer: {
-                label: {
-                  color: colors.dark,
-                },
-              },
-            },
-          ],
-          series: [
-            {
-              name: 'Atrasadas',
-              type: 'line',
-              xAxisIndex: 1,
-              smooth: true,
-              data: [
-                2.6,
-                5.9,
-                9.0,
-                11.4,
-                15.7,
-                23.7,
-                25.6,
-                23.2,
-                23.7,
-                31.8,
-                39.0,
-                40.3,
-              ],
-            },
-            {
-              name: 'Adiantadas',
-              type: 'line',
-              smooth: true,
-              data: [
-                5.6,
-                7.9,
-                13,
-                13.4,
-                17.7,
-                23.7,
-                25.6,
-                26.2,
-                28.7,
-                32.8,
-                38,
-                43.3,
-              ],
-            },
-          ],
         },
       },
-      total_expenses: {
-        columns: {
-          series: [
-            {
-              name: 'Atrasadas',
-              data: [44, 55, 57, 56, 51, 48, 30, 21, 0],
-            },
-            {
-              name: 'Adiantadas',
-              data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-            },
-          ],
-          options: {
-            chart: {
-              type: 'bar',
-              height: 350,
-              background: 'transparent',
-              foreColor: '#999',
-            },
-            theme: {
-              mode: 'dark',
-              palette: 'palette1',
-            },
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded',
-              },
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              show: true,
-              width: 2,
-              colors: ['transparent'],
-            },
-            xaxis: {
-              categories: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            fill: {
-              opacity: 1,
-            },
-            tooltip: {
-              y: {
-                formatter(val) {
-                  return `$ ${val} thousands`;
-                },
-              },
-            },
+      accumulated_evolution: {
+        color: LINE_COLORS,
+        tooltip: {
+          trigger: 'none',
+          axisPointer: {
+            type: 'cross',
           },
         },
-        lines: {
-          color: lineColors,
-          tooltip: {
-            trigger: 'none',
-            axisPointer: {
-              type: 'cross',
-            },
+        legend: {
+          data: ['2015 Precipitation', '2016 Precipitation'],
+          textStyle: {
+            color: colors.textColor,
           },
-          legend: {
-            data: ['2015 Precipitation', '2016 Precipitation'],
-            textStyle: {
-              color: colors.textColor,
+        },
+        grid: {
+          top: 70,
+          bottom: 50,
+        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true,
             },
-          },
-          grid: {
-            top: 70,
-            bottom: 50,
-          },
-          xAxis: [
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Adiantadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Atrasadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-          ],
-          yAxis: [
-            {
-              type: 'value',
-              axisLabel: {
+            axisLine: {
+              onZero: false,
+              lineStyle: {
                 color: '#999',
               },
-              axisLine: {
-                lineStyle: {
-                  color: colors.textColor,
-                },
-              },
-              splitLine: {
-                lineStyle: {
-                  color: colors.gridLineColor,
-                },
-              },
-              axisPointer: {
-                label: {
-                  color: colors.dark,
+            },
+            axisPointer: {
+              label: {
+                formatter(params) {
+                  return `Adiantadas  ${params.value}${
+                    params.seriesData.length
+                      ? `：${params.seriesData[0].data}`
+                      : ''
+                  }`;
                 },
               },
             },
-          ],
-          series: [
-            {
-              name: 'Atrasadas',
-              type: 'line',
-              xAxisIndex: 1,
-              smooth: true,
-              data: [
-                2.6,
-                5.9,
-                9.0,
-                11.4,
-                15.7,
-                23.7,
-                25.6,
-                23.2,
-                23.7,
-                31.8,
-                39.0,
-                40.3,
-              ],
+            data: [
+              'Nov-19',
+              'Dez-19',
+              'Jan-20',
+              'Fev-20',
+              'Mar-20',
+              'Abr-20',
+              'Mai-20',
+              'Jun-20',
+              'Jul-20',
+              'Ago-20',
+              'Set-20',
+              'Out-20',
+              'Nov-20',
+              'Dez-20',
+              'Jan-21',
+              'Fev-21',
+              'Mar-21',
+              'Abr-21',
+              'Mai-21',
+              'Jun-21',
+              'Jul-21',
+            ],
+          },
+          {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true,
             },
-            {
-              name: 'Adiantadas',
-              type: 'line',
-              smooth: true,
-              data: [
-                5.6,
-                7.9,
-                13,
-                13.4,
-                17.7,
-                23.7,
-                25.6,
-                26.2,
-                28.7,
-                32.8,
-                38,
-                43.3,
-              ],
+            axisLine: {
+              onZero: false,
+              lineStyle: {
+                color: '#999',
+              },
             },
-          ],
-        },
+            axisPointer: {
+              label: {
+                formatter(params) {
+                  return `Atrasadas  ${params.value}${
+                    params.seriesData.length
+                      ? `：${params.seriesData[0].data}`
+                      : ''
+                  }`;
+                },
+              },
+            },
+            data: [
+              'Nov-19',
+              'Dez-19',
+              'Jan-20',
+              'Fev-20',
+              'Mar-20',
+              'Abr-20',
+              'Mai-20',
+              'Jun-20',
+              'Jul-20',
+              'Ago-20',
+              'Set-20',
+              'Out-20',
+              'Nov-20',
+              'Dez-20',
+              'Jan-21',
+              'Fev-21',
+              'Mar-21',
+              'Abr-21',
+              'Mai-21',
+              'Jun-21',
+              'Jul-21',
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            axisLabel: {
+              color: '#999',
+            },
+            axisLine: {
+              lineStyle: {
+                color: colors.textColor,
+              },
+            },
+            splitLine: {
+              lineStyle: {
+                color: colors.gridLineColor,
+              },
+            },
+            axisPointer: {
+              label: {
+                color: colors.dark,
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            name: 'Atrasadas',
+            type: 'line',
+            xAxisIndex: 1,
+            smooth: true,
+            data: [13, 21, 24, 28, 29, 36, 39, 44, 47, 53],
+          },
+          {
+            name: 'Adiantadas',
+            type: 'line',
+            smooth: true,
+            data: [
+              15,
+              20,
+              23,
+              27,
+              31,
+              35,
+              39,
+              44,
+              49,
+              52,
+              59,
+              68,
+              75,
+              81,
+              94,
+              100,
+            ],
+          },
+        ],
       },
     },
   },
@@ -467,457 +331,321 @@ export const charts_data = [
     id: 'obra-34',
     label: 'Obra 34',
     data: {
-      direct_expenses: {
-        columns: {
-          series: [
-            {
-              name: 'Atrasadas',
-              data: [15, 52, 57, 56, 42, 48, 50, 19, 0],
-            },
-            {
-              name: 'Adiantadas',
-              data: [73, 80, 81, 98, 87, 92, 85, 81, 91],
-            },
-          ],
-          options: {
-            chart: {
-              type: 'bar',
-              height: 350,
-              background: 'transparent',
-              foreColor: '#999',
-            },
-            theme: {
-              mode: 'dark',
-              palette: 'palette1',
-            },
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded',
-              },
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              show: true,
-              width: 2,
-              colors: ['transparent'],
-            },
-            xaxis: {
-              categories: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            fill: {
-              opacity: 1,
-            },
-            tooltip: {
-              y: {
-                formatter(val) {
-                  return `$ ${val} thousands`;
-                },
-              },
+      table: {
+        direct_expenses: [
+          {
+            item_id: 1,
+            description: 'PROJETOS',
+            measured_percentage: 0.9955,
+            budget_value: 292608.87,
+            weight_percentage: 0.292,
+            accumulated_values: {
+              measured: 291302.89,
+              payments: 310798.7,
+              budget: -18189.83,
+              projection: 309836.92,
             },
           },
-        },
-        lines: {
-          color: lineColors,
+        ],
+        indirect_expenses: [
+          {
+            item_id: 1,
+            description: 'LICENÇAS, TAXAS E EMOLUMENTOS',
+            measured_percentage: 0.534,
+            budget_value: 153772.67,
+            weight_percentage: 0.153,
+            accumulated_values: {
+              measured: 82114.95,
+              payments: 75697.53,
+              budget: 78075.14,
+              projection: 144555.16,
+            },
+          },
+        ],
+      },
+      monthly_evolution: {
+        series: [
+          {
+            name: 'Atrasadas',
+            data: [
+              26,
+              65,
+              44,
+              55,
+              57,
+              56,
+              51,
+              48,
+              30,
+              21,
+              0,
+              56,
+              49,
+              56,
+              49,
+              78,
+              56,
+              0,
+              0,
+              0,
+            ],
+          },
+          {
+            name: 'Adiantadas',
+            data: [
+              23,
+              35,
+              76,
+              85,
+              101,
+              98,
+              87,
+              105,
+              91,
+              114,
+              94,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+            ],
+          },
+        ],
+        options: {
+          chart: {
+            type: 'bar',
+            height: 350,
+            background: 'transparent',
+            foreColor: '#999',
+          },
+          theme: {
+            mode: 'dark',
+            palette: 'palette1',
+          },
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: '55%',
+              endingShape: 'rounded',
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent'],
+          },
+          xaxis: {
+            categories: [
+              'Nov-19',
+              'Dez-19',
+              'Jan-20',
+              'Fev-20',
+              'Mar-20',
+              'Abr-20',
+              'Mai-20',
+              'Jun-20',
+              'Jul-20',
+              'Ago-20',
+              'Set-20',
+              'Out-20',
+              'Nov-20',
+              'Dez-20',
+              'Jan-21',
+              'Fev-21',
+              'Mar-21',
+              'Abr-21',
+              'Mai-21',
+              'Jun-21',
+              'Jul-21',
+            ],
+          },
+          fill: {
+            opacity: 1,
+          },
           tooltip: {
-            trigger: 'none',
-            axisPointer: {
-              type: 'cross',
+            y: {
+              formatter(val) {
+                return `$ ${val} thousands`;
+              },
             },
           },
-          legend: {
-            data: ['2015 Precipitation', '2016 Precipitation'],
-            textStyle: {
-              color: colors.textColor,
-            },
-          },
-          grid: {
-            top: 70,
-            bottom: 50,
-          },
-          xAxis: [
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Adiantadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Atrasadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-          ],
-          yAxis: [
-            {
-              type: 'value',
-              axisLabel: {
-                color: '#999',
-              },
-              axisLine: {
-                lineStyle: {
-                  color: colors.textColor,
-                },
-              },
-              splitLine: {
-                lineStyle: {
-                  color: colors.gridLineColor,
-                },
-              },
-              axisPointer: {
-                label: {
-                  color: colors.dark,
-                },
-              },
-            },
-          ],
-          series: [
-            {
-              name: 'Atrasadas',
-              type: 'line',
-              xAxisIndex: 1,
-              smooth: true,
-              data: [
-                2.6,
-                5.9,
-                9.0,
-                9.4,
-                12.7,
-                19.7,
-                20.6,
-                22.2,
-                23.7,
-                25.8,
-                36.0,
-                40.3,
-              ],
-            },
-            {
-              name: 'Adiantadas',
-              type: 'line',
-              smooth: true,
-              data: [
-                5.6,
-                7.9,
-                8,
-                12.4,
-                17.7,
-                18.7,
-                18.6,
-                23.2,
-                27.7,
-                30.8,
-                33,
-                38.3,
-              ],
-            },
-          ],
         },
       },
-      total_expenses: {
-        columns: {
-          series: [
-            {
-              name: 'Atrasadas',
-              data: [50, 46, 55, 56, 44, 47, 33, 19, 0],
-            },
-            {
-              name: 'Adiantadas',
-              data: [66, 83, 85, 96, 87, 95, 99, 105, 90],
-            },
-          ],
-          options: {
-            chart: {
-              type: 'bar',
-              height: 350,
-              background: 'transparent',
-              foreColor: '#999',
-            },
-            theme: {
-              mode: 'dark',
-              palette: 'palette1',
-            },
-            plotOptions: {
-              bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded',
-              },
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            stroke: {
-              show: true,
-              width: 2,
-              colors: ['transparent'],
-            },
-            xaxis: {
-              categories: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            fill: {
-              opacity: 1,
-            },
-            tooltip: {
-              y: {
-                formatter(val) {
-                  return `$ ${val} thousands`;
-                },
-              },
-            },
+      accumulated_evolution: {
+        color: LINE_COLORS,
+        tooltip: {
+          trigger: 'none',
+          axisPointer: {
+            type: 'cross',
           },
         },
-        lines: {
-          color: lineColors,
-          tooltip: {
-            trigger: 'none',
-            axisPointer: {
-              type: 'cross',
-            },
+        legend: {
+          data: ['2015 Precipitation', '2016 Precipitation'],
+          textStyle: {
+            color: colors.textColor,
           },
-          legend: {
-            data: ['2015 Precipitation', '2016 Precipitation'],
-            textStyle: {
-              color: colors.textColor,
+        },
+        grid: {
+          top: 70,
+          bottom: 50,
+        },
+        xAxis: [
+          {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true,
             },
-          },
-          grid: {
-            top: 70,
-            bottom: 50,
-          },
-          xAxis: [
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Adiantadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-            {
-              type: 'category',
-              axisTick: {
-                alignWithLabel: true,
-              },
-              axisLine: {
-                onZero: false,
-                lineStyle: {
-                  color: '#999',
-                },
-              },
-              axisPointer: {
-                label: {
-                  formatter(params) {
-                    return `Atrasadas  ${params.value}${
-                      params.seriesData.length
-                        ? `：${params.seriesData[0].data}`
-                        : ''
-                    }`;
-                  },
-                },
-              },
-              data: [
-                'Jan-20',
-                'Fev-20',
-                'Mar-20',
-                'Abr-20',
-                'Mai-20',
-                'Jun-20',
-                'Jul-20',
-                'Ago-20',
-                'Set-20',
-                'Out-20',
-                'Nov-20',
-                'Dez-20',
-              ],
-            },
-          ],
-          yAxis: [
-            {
-              type: 'value',
-              axisLabel: {
+            axisLine: {
+              onZero: false,
+              lineStyle: {
                 color: '#999',
               },
-              axisLine: {
-                lineStyle: {
-                  color: colors.textColor,
-                },
-              },
-              splitLine: {
-                lineStyle: {
-                  color: colors.gridLineColor,
-                },
-              },
-              axisPointer: {
-                label: {
-                  color: colors.dark,
+            },
+            axisPointer: {
+              label: {
+                formatter(params) {
+                  return `Adiantadas  ${params.value}${
+                    params.seriesData.length
+                      ? `：${params.seriesData[0].data}`
+                      : ''
+                  }`;
                 },
               },
             },
-          ],
-          series: [
-            {
-              name: 'Atrasadas',
-              type: 'line',
-              xAxisIndex: 1,
-              smooth: true,
-              data: [
-                2.6,
-                5.9,
-                9.0,
-                9.4,
-                11.7,
-                18.7,
-                19.6,
-                22.2,
-                23.7,
-                23.8,
-                29.0,
-                36.3,
-              ],
+            data: [
+              'Nov-19',
+              'Dez-19',
+              'Jan-20',
+              'Fev-20',
+              'Mar-20',
+              'Abr-20',
+              'Mai-20',
+              'Jun-20',
+              'Jul-20',
+              'Ago-20',
+              'Set-20',
+              'Out-20',
+              'Nov-20',
+              'Dez-20',
+              'Jan-21',
+              'Fev-21',
+              'Mar-21',
+              'Abr-21',
+              'Mai-21',
+              'Jun-21',
+              'Jul-21',
+            ],
+          },
+          {
+            type: 'category',
+            axisTick: {
+              alignWithLabel: true,
             },
-            {
-              name: 'Adiantadas',
-              type: 'line',
-              smooth: true,
-              data: [
-                5.6,
-                7.9,
-                13,
-                13.4,
-                15.7,
-                16.7,
-                24.6,
-                26.2,
-                28.7,
-                38.8,
-                40,
-                43.3,
-              ],
+            axisLine: {
+              onZero: false,
+              lineStyle: {
+                color: '#999',
+              },
             },
-          ],
-        },
+            axisPointer: {
+              label: {
+                formatter(params) {
+                  return `Atrasadas  ${params.value}${
+                    params.seriesData.length
+                      ? `：${params.seriesData[0].data}`
+                      : ''
+                  }`;
+                },
+              },
+            },
+            data: [
+              'Nov-19',
+              'Dez-19',
+              'Jan-20',
+              'Fev-20',
+              'Mar-20',
+              'Abr-20',
+              'Mai-20',
+              'Jun-20',
+              'Jul-20',
+              'Ago-20',
+              'Set-20',
+              'Out-20',
+              'Nov-20',
+              'Dez-20',
+              'Jan-21',
+              'Fev-21',
+              'Mar-21',
+              'Abr-21',
+              'Mai-21',
+              'Jun-21',
+              'Jul-21',
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            axisLabel: {
+              color: '#999',
+            },
+            axisLine: {
+              lineStyle: {
+                color: colors.textColor,
+              },
+            },
+            splitLine: {
+              lineStyle: {
+                color: colors.gridLineColor,
+              },
+            },
+            axisPointer: {
+              label: {
+                color: colors.dark,
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            name: 'Atrasadas',
+            type: 'line',
+            xAxisIndex: 1,
+            smooth: true,
+            data: [13, 21, 24, 28, 29, 36, 39, 44, 47, 53],
+          },
+          {
+            name: 'Adiantadas',
+            type: 'line',
+            smooth: true,
+            data: [
+              15,
+              20,
+              23,
+              27,
+              31,
+              35,
+              39,
+              44,
+              49,
+              52,
+              59,
+              68,
+              75,
+              81,
+              94,
+              100,
+            ],
+          },
+        ],
       },
     },
   },
