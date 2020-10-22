@@ -181,6 +181,7 @@ class Widget extends React.Component {
                   <i className="la la-cog text-white" />
                 </button>
               )}
+
               {refresh && (
                 <button
                   type="button"
@@ -202,6 +203,7 @@ class Widget extends React.Component {
                   )}
                 </button>
               )}
+
               {fullscreen && (
                 <button
                   type="button"
@@ -223,6 +225,7 @@ class Widget extends React.Component {
                   )}
                 </button>
               )}
+
               {!fullscreened && collapse && (
                 <span>
                   <button
@@ -246,50 +249,31 @@ class Widget extends React.Component {
                   </button>
                 </span>
               )}
-              {!fullscreened &&
-                (close && !prompt ? (
-                  <button
-                    type="button"
-                    onClick={this.handleClose}
-                    id={`closeId-${randomId}`}
-                  >
-                    {typeof close === 'string' ? (
-                      <strong className="text-gray-light">{close}</strong>
-                    ) : (
-                      <i className="la la-remove" />
-                    )}
-                    {showTooltip && (
-                      <UncontrolledTooltip
-                        placement={tooltipPlacement}
-                        target={`closeId-${randomId}`}
-                      >
-                        Close
-                      </UncontrolledTooltip>
-                    )}
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={this.toggleModal}
-                    id={`closeId-${randomId}`}
-                  >
-                    {typeof close === 'string' ? (
-                      <strong className="text-gray-light">{close}</strong>
-                    ) : (
-                      <i className="la la-remove" />
-                    )}
-                    {showTooltip && (
-                      <UncontrolledTooltip
-                        placement={tooltipPlacement}
-                        target={`closeId-${randomId}`}
-                      >
-                        Modal
-                      </UncontrolledTooltip>
-                    )}
-                  </button>
-                ))}
+
+              {!fullscreened && close && !prompt && (
+                <button
+                  type="button"
+                  onClick={this.handleClose}
+                  id={`closeId-${randomId}`}
+                >
+                  {typeof close === 'string' ? (
+                    <strong className="text-gray-light">{close}</strong>
+                  ) : (
+                    <i className="la la-remove" />
+                  )}
+                  {showTooltip && (
+                    <UncontrolledTooltip
+                      placement={tooltipPlacement}
+                      target={`closeId-${randomId}`}
+                    >
+                      Close
+                    </UncontrolledTooltip>
+                  )}
+                </button>
+              )}
             </div>
           )}
+
           {customDropDown && (
             <div className={`${s.widgetControls} widget-controls`}>
               <UncontrolledDropdown>
@@ -325,6 +309,7 @@ class Widget extends React.Component {
               </UncontrolledDropdown>
             </div>
           )}
+
           {customControls && (
             <div className={`${s.widgetControls} widget-controls`}>
               {!fullscreened &&
@@ -347,6 +332,7 @@ class Widget extends React.Component {
                     <i title="Close" className="glyphicon glyphicon-remove" />
                   </button>
                 ))}
+
               {!fullscreened && customCollapse && (
                 <button
                   type="button"
@@ -362,6 +348,7 @@ class Widget extends React.Component {
                   />
                 </button>
               )}
+
               {customFullscreen && (
                 <button
                   type="button"
@@ -377,6 +364,7 @@ class Widget extends React.Component {
                   />
                 </button>
               )}
+
               {customReload && (
                 <button
                   type="button"
@@ -389,6 +377,7 @@ class Widget extends React.Component {
               )}
             </div>
           )}
+
           <AnimateHeight duration={500} height={height}>
             <div className={`${s.widgetBody} widget-body ${bodyClass}`}>
               {/* eslint-disable-next-line no-nested-ternary */}
@@ -398,10 +387,12 @@ class Widget extends React.Component {
                 <div className="jumbotron handle bg-default text-white mb-0">
                   <div className="container">
                     <h1>Draggable story!</h1>
+
                     <p className="lead">
                       <em>Build</em>
                       your own interfaces! Sit back and relax.
                     </p>
+
                     <p className="text-center">
                       <button
                         type="button"
@@ -453,6 +444,7 @@ class Widget extends React.Component {
             </ModalFooter>
           </Modal>
         )}
+
         <div
           style={{ display: fullscreened ? 'block' : 'none' }}
           className={s.widgetBackground}

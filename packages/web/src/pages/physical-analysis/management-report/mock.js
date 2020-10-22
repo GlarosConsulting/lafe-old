@@ -41,6 +41,118 @@ export const DATA = [
           },
         ],
       },
+      summary_projections: {
+        table: {
+          months_labels: ['Set-20', 'Ago-20'],
+          data: [
+            {
+              description: '% Financeiro Acumulado Previsto',
+              percentages: [0.5365, 0.4935],
+            },
+            {
+              description: '% Financeiro Acumulado Executado',
+              percentages: [0.6053, 0.5494],
+            },
+            {
+              description: 'Custo previsto até a data',
+              values: [5344100.04, 4917915.07],
+            },
+            {
+              description: 'Custo medido até a data',
+              values: [6072681.63, 5531257.85],
+            },
+            {
+              description: 'Custo Real até a data',
+              values: [5647485.02, 5122250.47],
+            },
+            {
+              description: 'Valor orçado',
+              values: [10031917.43, 10067530.38],
+            },
+            {
+              description: 'Custo projetado',
+              values: [9507678.13, 9493851.53],
+            },
+            {
+              description: 'Tendência financeira',
+              percentages: [-0.0523, -0.057],
+            },
+            {
+              description: 'Custo projetado por m² de AEQ',
+              values: [2924.39, 2920.14],
+            },
+            {
+              description: 'Área Equivalente',
+              values: [3251.16, 3251.16],
+            },
+          ],
+        },
+        chart: {
+          series: [
+            {
+              name: 'Custo orçado',
+              data: [24, 5, 8, 13, 55, 100, 21, 7, 40, 33, 77, 8],
+            },
+            {
+              name: 'Custo projetado',
+              data: [20, 6, 6, 10, 49, 97, 20, 8, 42, 30, 73, 6],
+            },
+          ],
+          options: {
+            chart: {
+              type: 'bar',
+              height: 350,
+              background: 'transparent',
+              foreColor: '#999',
+            },
+            theme: {
+              mode: 'dark',
+              palette: 'palette4',
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded',
+              },
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent'],
+            },
+            xaxis: {
+              categories: [
+                'Projetos',
+                'Serviços preliminares',
+                'Fundação',
+                'Alvenaria / Fechamento',
+                'Revestimento de piso',
+                'Revestimento de teto',
+                'Esquadrias em madeira',
+                'Bancadas',
+                'Pintura',
+                'Licenças, taxas e em olumentos',
+                'Custos indiretos - Pessoal',
+                'Custos indiretos - Outros',
+              ],
+            },
+            fill: {
+              opacity: 1,
+            },
+            tooltip: {
+              y: {
+                formatter(val) {
+                  return `${val}%`;
+                },
+              },
+            },
+          },
+        },
+      },
       monthly_evolution: {
         series: [
           {
@@ -362,6 +474,118 @@ export const DATA = [
             },
           },
         ],
+      },
+      summary_projections: {
+        table: {
+          months_labels: ['Set-20', 'Ago-20'],
+          data: [
+            {
+              description: '% Financeiro Acumulado Previsto',
+              percentages: [0.5365, 0.4935],
+            },
+            {
+              description: '% Financeiro Acumulado Executado',
+              percentages: [0.6053, 0.5494],
+            },
+            {
+              description: 'Custo previsto até a data',
+              values: [5344100.04, 4917915.07],
+            },
+            {
+              description: 'Custo medido até a data',
+              values: [6072681.63, 5531257.85],
+            },
+            {
+              description: 'Custo Real até a data',
+              values: [5647485.02, 5122250.47],
+            },
+            {
+              description: 'Valor orçado',
+              values: [10031917.43, 10067530.38],
+            },
+            {
+              description: 'Custo projetado',
+              values: [9507678.13, 9493851.53],
+            },
+            {
+              description: 'Tendência financeira',
+              percentages: [-0.0523, -0.057],
+            },
+            {
+              description: 'Custo projetado por m² de AEQ',
+              values: [2924.39, 2920.14],
+            },
+            {
+              description: 'Área Equivalente',
+              values: [3251.16, 3251.16],
+            },
+          ],
+        },
+        chart: {
+          series: [
+            {
+              name: 'Custo orçado',
+              data: [24, 5, 8, 13, 55, 100, 21, 7, 40, 33, 77, 8],
+            },
+            {
+              name: 'Custo projetado',
+              data: [20, 6, 6, 10, 49, 97, 20, 8, 42, 30, 73, 6],
+            },
+          ],
+          options: {
+            chart: {
+              type: 'bar',
+              height: 350,
+              background: 'transparent',
+              foreColor: '#999',
+            },
+            theme: {
+              mode: 'dark',
+              palette: 'palette4',
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded',
+              },
+            },
+            dataLabels: {
+              enabled: false,
+            },
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent'],
+            },
+            xaxis: {
+              categories: [
+                'Projetos',
+                'Serviços preliminares',
+                'Fundação',
+                'Alvenaria / Fechamento',
+                'Revestimento de piso',
+                'Revestimento de teto',
+                'Esquadrias em madeira',
+                'Bancadas',
+                'Pintura',
+                'Licenças, taxas e em olumentos',
+                'Custos indiretos - Pessoal',
+                'Custos indiretos - Outros',
+              ],
+            },
+            fill: {
+              opacity: 1,
+            },
+            tooltip: {
+              y: {
+                formatter(val) {
+                  return `${val}%`;
+                },
+              },
+            },
+          },
+        },
       },
       monthly_evolution: {
         series: [
