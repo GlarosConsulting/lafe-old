@@ -185,6 +185,73 @@ class ManagementReport extends React.Component {
             <Widget
               title={
                 <h5>
+                  <span>Síntese das projeções</span>
+                </h5>
+              }
+              collapse
+            >
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Set-20</th>
+                    <th>Ago-20</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {activeConstruction.data.summary_projections.table.data.map(
+                    row => (
+                      <tr>
+                        <td>{row.description}</td>
+                        <td>
+                          {row.percentages
+                            ? formatPercentage(row.percentages[0])
+                            : formatValue(row.values[0])}
+                        </td>
+                        <td>
+                          {row.percentages
+                            ? formatPercentage(row.percentages[1])
+                            : formatValue(row.values[1])}
+                        </td>
+                      </tr>
+                    ),
+                  )}
+                </tbody>
+              </Table>
+            </Widget>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={12}>
+            <Widget
+              title={
+                <h5>
+                  <span>Síntese das projeções</span>
+                </h5>
+              }
+              collapse
+            >
+              <ApexChart
+                type="bar"
+                series={
+                  activeConstruction.data.summary_projections.chart.series
+                }
+                options={
+                  activeConstruction.data.summary_projections.chart.options
+                }
+                height={350}
+              />
+            </Widget>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col xs={12}>
+            <Widget
+              title={
+                <h5>
                   <span>Evolução mensal das despesas totais</span>
                 </h5>
               }
