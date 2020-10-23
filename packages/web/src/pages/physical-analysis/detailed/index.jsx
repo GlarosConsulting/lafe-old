@@ -95,6 +95,7 @@ class Detailed extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -136,6 +137,7 @@ class Detailed extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -183,6 +185,7 @@ class Detailed extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -230,6 +233,7 @@ class Detailed extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>

@@ -99,6 +99,7 @@ class ManagementReport extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -144,6 +145,7 @@ class ManagementReport extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -189,6 +191,7 @@ class ManagementReport extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
