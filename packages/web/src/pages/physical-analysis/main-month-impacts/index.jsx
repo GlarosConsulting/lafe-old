@@ -75,6 +75,7 @@ class MainMonthImpacts extends React.Component {
             >
               {DATA.map(item => (
                 <DropdownItem
+                  key={item.id}
                   active={item.id === activeConstruction.id}
                   onClick={() => this.handleChangeActiveConstruction(item)}
                 >
@@ -165,7 +166,7 @@ class MainMonthImpacts extends React.Component {
 
                 <tbody>
                   {activeConstruction.data.main_early_activities.map(row => (
-                    <tr>
+                    <tr key={row.item_id}>
                       <td>{row.item_id}</td>
                       <td>{row.description}</td>
                       <td>
@@ -218,7 +219,7 @@ class MainMonthImpacts extends React.Component {
 
                 <tbody>
                   {activeConstruction.data.main_activities_to_start.map(row => (
-                    <tr>
+                    <tr key={row.item_id}>
                       <td>{row.item_id}</td>
                       <td>{row.description}</td>
                       <td>
