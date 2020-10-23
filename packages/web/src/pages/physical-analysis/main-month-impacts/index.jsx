@@ -91,10 +91,11 @@ class MainMonthImpacts extends React.Component {
             <Widget
               title={
                 <h5>
-                  <span />
+                  <span>Tabela</span>
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -148,6 +149,7 @@ class MainMonthImpacts extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
@@ -203,6 +205,7 @@ class MainMonthImpacts extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <Table>
                 <thead>
