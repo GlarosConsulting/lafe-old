@@ -77,8 +77,8 @@ $theme-colors: (
 
 $link-color: #1870DC;
 
-$text-color: rgba($white,.9) !default;
-$content-color: rgba($white,.6) !default;
+$text-color: $white !default;
+$content-color: rgba($white,.9) !default;
 $text-muted:  $gray-400 !default;
 
 $font-weight-bold: 700 !default;

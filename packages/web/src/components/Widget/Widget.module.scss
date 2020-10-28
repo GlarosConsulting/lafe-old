@@ -2,7 +2,6 @@
 
 .title {
   margin-top: 0;
-  color: $widget-title-color;
   padding: 15px 20px 0;
 
   @include clearfix();
@@ -109,7 +108,7 @@
   }
 
   :global {
-    
+
     .loader {
       position: absolute;
       top: 0;
@@ -128,7 +127,7 @@
     }
     .widget-body.undo_padding {
       margin: $widget-padding-vertical (-$widget-padding-horizontal) (-$widget-padding-vertical);
-      
+
 
       + footer {
         margin-top: $widget-padding-vertical;
@@ -144,7 +143,7 @@
 .widget {
   &:global.p-0 .widget-body {
       padding: 0!important;
-  }  
+  }
 }
 
 .widgetBody {
