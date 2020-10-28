@@ -95,133 +95,108 @@ class ManagementReport extends React.Component {
             <Widget
               title={
                 <h5>
-                  <span>Despesas diretas</span>
+                  <span>Despesas</span>
                 </h5>
               }
               collapse
               collapsed
             >
-              <Table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Descrição</th>
-                    <th>% medido</th>
-                    <th>Valor orçado</th>
-                    <th>Peso %</th>
-                    <th>Acum. - Medido</th>
-                    <th>Acum. - Pagamentos</th>
-                    <th>Acum. - Verba disponível</th>
-                    <th>Acum. - Projeção</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {activeConstruction.data.table.direct_expenses.map(row => (
+              <Widget
+                title={
+                  <h5>
+                    <span>Diretas</span>
+                  </h5>
+                }
+                collapse
+                collapsed
+              >
+                <Table>
+                  <thead>
                     <tr>
-                      <td>{row.item_id}</td>
-                      <td>{row.description}</td>
-                      <td>{formatPercentage(row.measured_percentage)}</td>
-                      <td>{formatValue(row.budget_value)}</td>
-                      <td>{formatPercentage(row.weight_percentage)}</td>
-                      <td>{formatValue(row.accumulated_values.measured)}</td>
-                      <td>{formatValue(row.accumulated_values.payments)}</td>
-                      <td>{formatValue(row.accumulated_values.budget)}</td>
-                      <td>{formatValue(row.accumulated_values.projection)}</td>
+                      <th>#</th>
+                      <th>Descrição</th>
+                      <th>% medido</th>
+                      <th>Valor orçado</th>
+                      <th>Peso %</th>
+                      <th>Acum. - Medido</th>
+                      <th>Acum. - Pagamentos</th>
+                      <th>Acum. - Verba disponível</th>
+                      <th>Acum. - Projeção</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Widget>
-          </Col>
-        </Row>
+                  </thead>
 
-        <Row>
-          <Col lg={12}>
-            <Widget
-              title={
-                <h5>
-                  <span>Despesas indiretas</span>
-                </h5>
-              }
-              collapse
-              collapsed
-            >
-              <Table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Descrição</th>
-                    <th>% medido</th>
-                    <th>Valor orçado</th>
-                    <th>Peso %</th>
-                    <th>Acum. - Medido</th>
-                    <th>Acum. - Pagamentos</th>
-                    <th>Acum. - Verba disponível</th>
-                    <th>Acum. - Projeção</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {activeConstruction.data.table.indirect_expenses.map(row => (
-                    <tr>
-                      <td>{row.item_id}</td>
-                      <td>{row.description}</td>
-                      <td>{formatPercentage(row.measured_percentage)}</td>
-                      <td>{formatValue(row.budget_value)}</td>
-                      <td>{formatPercentage(row.weight_percentage)}</td>
-                      <td>{formatValue(row.accumulated_values.measured)}</td>
-                      <td>{formatValue(row.accumulated_values.payments)}</td>
-                      <td>{formatValue(row.accumulated_values.budget)}</td>
-                      <td>{formatValue(row.accumulated_values.projection)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-            </Widget>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col xs={12}>
-            <Widget
-              title={
-                <h5>
-                  <span>Síntese das projeções</span>
-                </h5>
-              }
-              collapse
-              collapsed
-            >
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Descrição</th>
-                    <th>Set-20</th>
-                    <th>Ago-20</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {activeConstruction.data.summary_projections.table.data.map(
-                    row => (
+                  <tbody>
+                    {activeConstruction.data.table.direct_expenses.map(row => (
                       <tr>
+                        <td>{row.item_id}</td>
                         <td>{row.description}</td>
+                        <td>{formatPercentage(row.measured_percentage)}</td>
+                        <td>{formatValue(row.budget_value)}</td>
+                        <td>{formatPercentage(row.weight_percentage)}</td>
+                        <td>{formatValue(row.accumulated_values.measured)}</td>
+                        <td>{formatValue(row.accumulated_values.payments)}</td>
+                        <td>{formatValue(row.accumulated_values.budget)}</td>
                         <td>
-                          {row.percentages
-                            ? formatPercentage(row.percentages[0])
-                            : formatValue(row.values[0])}
-                        </td>
-                        <td>
-                          {row.percentages
-                            ? formatPercentage(row.percentages[1])
-                            : formatValue(row.values[1])}
+                          {formatValue(row.accumulated_values.projection)}
                         </td>
                       </tr>
-                    ),
-                  )}
-                </tbody>
-              </Table>
+                    ))}
+                  </tbody>
+                </Table>
+              </Widget>
+
+              <Widget
+                title={
+                  <h5>
+                    <span>Indiretas</span>
+                  </h5>
+                }
+                collapse
+                collapsed
+                style={{
+                  marginBottom: 5,
+                }}
+              >
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Descrição</th>
+                      <th>% medido</th>
+                      <th>Valor orçado</th>
+                      <th>Peso %</th>
+                      <th>Acum. - Medido</th>
+                      <th>Acum. - Pagamentos</th>
+                      <th>Acum. - Verba disponível</th>
+                      <th>Acum. - Projeção</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {activeConstruction.data.table.indirect_expenses.map(
+                      row => (
+                        <tr>
+                          <td>{row.item_id}</td>
+                          <td>{row.description}</td>
+                          <td>{formatPercentage(row.measured_percentage)}</td>
+                          <td>{formatValue(row.budget_value)}</td>
+                          <td>{formatPercentage(row.weight_percentage)}</td>
+                          <td>
+                            {formatValue(row.accumulated_values.measured)}
+                          </td>
+                          <td>
+                            {formatValue(row.accumulated_values.payments)}
+                          </td>
+                          <td>{formatValue(row.accumulated_values.budget)}</td>
+                          <td>
+                            {formatValue(row.accumulated_values.projection)}
+                          </td>
+                        </tr>
+                      ),
+                    )}
+                  </tbody>
+                </Table>
+              </Widget>
             </Widget>
           </Col>
         </Row>
@@ -235,17 +210,71 @@ class ManagementReport extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
-              <ApexChart
-                type="bar"
-                series={
-                  activeConstruction.data.summary_projections.chart.series
+              <Widget
+                title={
+                  <h5>
+                    <span>Tabela</span>
+                  </h5>
                 }
-                options={
-                  activeConstruction.data.summary_projections.chart.options
+                collapse
+                collapsed
+              >
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th>Set-20</th>
+                      <th>Ago-20</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {activeConstruction.data.summary_projections.table.data.map(
+                      row => (
+                        <tr>
+                          <td>{row.description}</td>
+                          <td>
+                            {row.percentages
+                              ? formatPercentage(row.percentages[0])
+                              : formatValue(row.values[0])}
+                          </td>
+                          <td>
+                            {row.percentages
+                              ? formatPercentage(row.percentages[1])
+                              : formatValue(row.values[1])}
+                          </td>
+                        </tr>
+                      ),
+                    )}
+                  </tbody>
+                </Table>
+              </Widget>
+
+              <Widget
+                title={
+                  <h5>
+                    <span>Gráfico</span>
+                  </h5>
                 }
-                height={350}
-              />
+                collapse
+                collapsed
+                style={{
+                  marginBottom: 5,
+                }}
+              >
+                <ApexChart
+                  type="bar"
+                  series={
+                    activeConstruction.data.summary_projections.chart.series
+                  }
+                  options={
+                    activeConstruction.data.summary_projections.chart.options
+                  }
+                  height={350}
+                />
+              </Widget>
             </Widget>
           </Col>
         </Row>
@@ -259,6 +288,7 @@ class ManagementReport extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <ApexChart
                 type="bar"
@@ -279,6 +309,7 @@ class ManagementReport extends React.Component {
                 </h5>
               }
               collapse
+              collapsed
             >
               <ReactEchartsCore
                 echarts={echarts}
