@@ -352,6 +352,15 @@ export const DATA = [
             },
           },
         ],
+        total: {
+          budget_value: 10031917.4375745,
+          accumulated_values: {
+            measured: 6072681.63737899,
+            payments: 6056769.65554625,
+            budget: 3975147.78202821,
+            projection: 9507678.14,
+          },
+        },
       },
       summary_projections: {
         table: {
@@ -1098,6 +1107,15 @@ export const DATA = [
             },
           },
         ],
+        total: {
+          budget_value: 15234346.584063,
+          accumulated_values: {
+            measured: 2240774.49723939,
+            payments: 2203036.75897213,
+            budget: 13031309.8250909,
+            projection: 12452686.7059994,
+          },
+        },
       },
       summary_projections: {
         table: {
@@ -1881,6 +1899,15 @@ export const DATA = [
             },
           },
         ],
+        total: {
+          budget_value: 8894461.62135576,
+          accumulated_values: {
+            measured: 484933.683940813,
+            payments: 405860.606236363,
+            budget: 8488601.0151194,
+            projection: 8823426.84345414,
+          },
+        },
       },
       summary_projections: {
         table: {

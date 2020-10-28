@@ -95,7 +95,7 @@ class ManagementReport extends React.Component {
             <Widget
               title={
                 <h5>
-                  <span>Despesas</span>
+                  <span>Análise financeira</span>
                 </h5>
               }
               collapse
@@ -104,7 +104,7 @@ class ManagementReport extends React.Component {
               <Widget
                 title={
                   <h5>
-                    <span>Diretas</span>
+                    <span>Despesas diretas</span>
                   </h5>
                 }
                 collapse
@@ -148,13 +148,13 @@ class ManagementReport extends React.Component {
               <Widget
                 title={
                   <h5>
-                    <span>Indiretas</span>
+                    <span>Despesas indiretas</span>
                   </h5>
                 }
                 collapse
                 collapsed
                 style={{
-                  marginBottom: 5,
+                  marginBottom: 15,
                 }}
               >
                 <Table>
@@ -197,6 +197,60 @@ class ManagementReport extends React.Component {
                   </tbody>
                 </Table>
               </Widget>
+
+              <Table style={{ marginBottom: 0 }}>
+                <thead>
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Valor orçado</th>
+                    <th>Peso %</th>
+                    <th>Acum. - Medido</th>
+                    <th>Acum. - Pagamentos</th>
+                    <th>Acum. - Verba disponível</th>
+                    <th>Acum. - Projeção</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr>
+                    <td>TOTAL GERAL</td>
+                    <td>
+                      {formatValue(
+                        activeConstruction.data.table.total.budget_value,
+                      )}
+                    </td>
+                    <td>
+                      {formatPercentage(
+                        activeConstruction.data.table.total.weight_percentage,
+                      )}
+                    </td>
+                    <td>
+                      {formatValue(
+                        activeConstruction.data.table.total.accumulated_values
+                          .measured,
+                      )}
+                    </td>
+                    <td>
+                      {formatValue(
+                        activeConstruction.data.table.total.accumulated_values
+                          .payments,
+                      )}
+                    </td>
+                    <td>
+                      {formatValue(
+                        activeConstruction.data.table.total.accumulated_values
+                          .budget,
+                      )}
+                    </td>
+                    <td>
+                      {formatValue(
+                        activeConstruction.data.table.total.accumulated_values
+                          .projection,
+                      )}
+                    </td>
+                  </tr>
+                </tbody>
+              </Table>
             </Widget>
           </Col>
         </Row>
