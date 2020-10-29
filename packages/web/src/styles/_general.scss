@@ -58,3 +58,12 @@ ol {
   padding-left: 0;
 }
 
+table.table {
+  thead th {
+    border-bottom: 2px solid #454545;
+  }
+
+  tbody td {
+    border-top: 1px solid #454545;
+  }
+}
