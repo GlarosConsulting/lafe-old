@@ -260,7 +260,7 @@ class ManagementReport extends React.Component {
             <Widget
               title={
                 <h5>
-                  <span>Síntese das projeções</span>
+                  <span>Síntese das projeções x Orçamento</span>
                 </h5>
               }
               collapse
@@ -338,41 +338,47 @@ class ManagementReport extends React.Component {
             <Widget
               title={
                 <h5>
-                  <span>Evolução mensal das despesas totais</span>
+                  <span>Evolução financeira</span>
                 </h5>
               }
               collapse
               collapsed
             >
-              <ApexChart
-                type="bar"
-                series={activeConstruction.data.monthly_evolution.series}
-                options={activeConstruction.data.monthly_evolution.options}
-                height={350}
-              />
-            </Widget>
-          </Col>
-        </Row>
+              <Widget
+                title={
+                  <h5>
+                    <span>Evolução mensal das despesas totais</span>
+                  </h5>
+                }
+                collapse
+                collapsed
+              >
+                <ApexChart
+                  type="bar"
+                  series={activeConstruction.data.monthly_evolution.series}
+                  options={activeConstruction.data.monthly_evolution.options}
+                  height={350}
+                />
+              </Widget>
 
-        <Row>
-          <Col xs={12}>
-            <Widget
-              title={
-                <h5>
-                  <span>Evolução acumulada das despesas totais</span>
-                </h5>
-              }
-              collapse
-              collapsed
-            >
-              <ReactEchartsCore
-                echarts={echarts}
-                option={activeConstruction.data.accumulated_evolution}
-                opts={{
-                  renderer: 'canvas',
-                }}
-                style={{ height: '365px' }}
-              />
+              <Widget
+                title={
+                  <h5>
+                    <span>Evolução acumulada das despesas totais</span>
+                  </h5>
+                }
+                collapse
+                collapsed
+              >
+                <ReactEchartsCore
+                  echarts={echarts}
+                  option={activeConstruction.data.accumulated_evolution}
+                  opts={{
+                    renderer: 'canvas',
+                  }}
+                  style={{ height: '365px' }}
+                />
+              </Widget>
             </Widget>
           </Col>
         </Row>
