@@ -37,9 +37,12 @@ $gray-800: #3c484f !default;
 $gray-900: #29323a !default;
 $black:    #000 !default;
 $gray-light: $gray-100 !default;
+$gray-dark: #333 !default;
+$gray-darker: #1b1b1b !default;
+$gray-darkest: #0b0b0b !default;
 
 $bg-custom-dark: #040620;
-$main-gradient: radial-gradient(farthest-side ellipse at 10% 0, #333867 20%, #17193B);
+$main-gradient: radial-gradient(farthest-side ellipse at 10% 0, #eee 20%, #ccc);
 
 $lime:       #8cbf26 !default;
 $red:        #F45722 !default;
@@ -77,9 +80,11 @@ $theme-colors: (
 
 $link-color: #1870DC;
 
-$text-color: $white !default;
-$content-color: rgba($white,.9) !default;
-$text-muted:  $gray-400 !default;
+$text-color: $gray-darker !default;
+$content-color: rgba($gray-darker,.9) !default;
+$text-muted:  $gray-900 !default;
+$text-darker:  $gray-darkest !default;
+$text-light:  $gray-dark !default;
 
 $font-weight-bold: 700 !default;
 $font-weight-semi-bold: 600 !default;
@@ -114,7 +119,7 @@ $sidebar-width-closed: 50px;
 $sidebar-transition-time: 0.3s !default;
 
 $sidebar-bg-color: transparent !default;
-$sidebar-color: rgba($white, .9) !default;
+$sidebar-color: $gray-darker !default;
 $sidebar-action-bg: transparent !default;
 
 $sidebar-item-border-color: transparent !default;

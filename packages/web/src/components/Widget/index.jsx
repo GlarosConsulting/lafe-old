@@ -178,7 +178,7 @@ class Widget extends React.Component {
                   type="button"
                   className={`bg-gray-transparent ${s.inverse}`}
                 >
-                  <i className="la la-cog text-white" />
+                  <i className="la la-cog" />
                 </button>
               )}
 
@@ -384,7 +384,7 @@ class Widget extends React.Component {
               {reloading || fetchingData ? (
                 <Loader className={s.widgetLoader} size={40} />
               ) : customBody ? (
-                <div className="jumbotron handle bg-default text-white mb-0">
+                <div className="jumbotron handle bg-default mb-0">
                   <div className="container">
                     <h1>Draggable story!</h1>
 

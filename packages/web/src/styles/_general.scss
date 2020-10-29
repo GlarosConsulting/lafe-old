@@ -32,19 +32,27 @@ a:hover {
 }
 
 th {
-  font-weight: 600;
+  font-weight: $font-weight-semi-bold;
 }
 
 td {
-  font-weight: 300;
+  font-weight: $font-weight-thin;
 }
 
 label {
-  font-weight: 400;
+  font-weight: $font-weight-normal;
 }
 
 strong {
-  font-weight: 700;
+  font-weight: $font-weight-bold;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: $font-weight-thin;
+}
+
+i {
+  color: $text-light;
 }
 
 ul ul,
@@ -56,14 +64,4 @@ ul,
 ol {
   list-style: none;
   padding-left: 0;
-}
-
-table.table {
-  thead th {
-    border-bottom: 2px solid #454545;
-  }
-
-  tbody td {
-    border-top: 1px solid #454545;
-  }
 }

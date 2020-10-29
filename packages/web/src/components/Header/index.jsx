@@ -174,7 +174,7 @@ class Header extends React.Component {
             <InputGroup className="input-group-no-border">
               <InputGroupAddon addonType="prepend">
                 <InputGroupText>
-                  <i className="fa fa-search text-white" />
+                  <i className="fa fa-search" />
                 </InputGroupText>
               </InputGroupAddon>
               <Input
@@ -219,7 +219,7 @@ class Header extends React.Component {
               className={s.navItem}
               href="#"
             >
-              <i className="glymessagesOpenphicon glyphicon-search text-white" />
+              <i className="glymessagesOpenphicon glyphicon-search" />
             </NavLink>
           </NavItem>
           <Dropdown
@@ -227,7 +227,7 @@ class Header extends React.Component {
             isOpen={messagesOpen}
             toggle={this.toggleMessagesDropdown}
           >
-            <DropdownToggle nav className={`${s.navItem} text-white`}>
+            <DropdownToggle nav className={`${s.navItem}`}>
               <i className="glyphicon glyphicon-comments" />
             </DropdownToggle>
             <DropdownMenu className={`${s.dropdownMenu} ${s.messages}`}>
@@ -258,7 +258,7 @@ class Header extends React.Component {
               </DropdownItem>
               <DropdownItem>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a href="#" className="text-white">
+                <a href="#">
                   <span>See all messages</span>
                   <i className="fa fa-arrow-right" />
                 </a>
@@ -266,14 +266,14 @@ class Header extends React.Component {
             </DropdownMenu>
           </Dropdown>
 
-          <NavItem className={`${s.divider} text-white`} />
+          <NavItem className={`${s.divider}`} />
 
           <Dropdown
             nav
             isOpen={settingsOpen}
             toggle={this.toggleSettingsDropdown}
           >
-            <DropdownToggle nav className={`${s.navItem} text-white`}>
+            <DropdownToggle nav className={`${s.navItem}`}>
               <i className="glyphicon glyphicon-cog" />
             </DropdownToggle>
             <DropdownMenu className={`${s.dropdownMenu} ${s.settings}`}>
@@ -319,7 +319,7 @@ class Header extends React.Component {
             isOpen={supportOpen}
             toggle={this.toggleSupportDropdown}
           >
-            <DropdownToggle nav className={`${s.navItem} text-white`}>
+            <DropdownToggle nav className={`${s.navItem}`}>
               <i className="glyphicon glyphicon-globe" />
               <span className={s.count}>8</span>
             </DropdownToggle>
@@ -360,7 +360,7 @@ class Header extends React.Component {
               </DropdownItem>
               <DropdownItem>
                 {/* eslint-disable-next-line */}
-                <a href="#" className="text-white">
+                <a href="#">
                   <span>See all tickets </span>
                   <i className="fa fa-arrow-right" />
                 </a>
@@ -371,7 +371,7 @@ class Header extends React.Component {
           <NavItem>
             <NavLink
               onClick={this.doLogout}
-              className={`${s.navItem} text-white`}
+              className={`${s.navItem}`}
               href="#"
             >
               <i className="glyphicon glyphicon-off" />
@@ -381,7 +381,7 @@ class Header extends React.Component {
           <NavItem className="d-md-none">
             <NavLink
               onClick={this.toggleSidebar}
-              className={`${s.navItem} text-white`}
+              className={`${s.navItem}`}
               href="#"
             >
               <i className="fa fa-bars" />

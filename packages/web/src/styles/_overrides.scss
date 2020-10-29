@@ -64,14 +64,14 @@
 
 .nav {
   .dropdown-toggle {
-    color: $white;
+    color: $text-color;
   }
 
   .nav-item.dropdown.show .nav-link.active,
   .nav-item.show .dropdown-toggle,
   .nav-link.active,
   .dropdown-menu {
-    color: $white;
+    color: $text-color;
     background-color: rgba($widget-bg-color, 1);
   }
 }
@@ -217,7 +217,16 @@ legend {
 }
 
 .table {
-  color: inherit;
+  color: $text-darker !important;
+
+  thead th {
+    border-bottom: 2px solid #454545;
+  }
+
+  tbody td {
+    border-top: 1px solid #454545;
+    font-weight: $font-weight-normal;
+  }
 }
 
 h1,
@@ -259,6 +268,7 @@ small {
   opacity: .8;
   font-size: 85%;
   font-weight: 600;
+  color: $text-darker;
 }
 
 .btn-link {
@@ -268,8 +278,8 @@ small {
 }
 
 .btn-secondary {
-  border-color: $gray-400;
-  color: $white;
+  border-color: $text-light;
+  color: $text-color;
 }
 
 .btn-success,
