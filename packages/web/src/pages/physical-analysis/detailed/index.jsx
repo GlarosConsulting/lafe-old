@@ -63,9 +63,7 @@ class Detailed extends React.Component {
             isOpen={isConstructionDropdownOpen}
             toggle={this.handleToggleConstructionDropdown}
           >
-            <DropdownToggle
-              className={`${s.constructionDropdownToggle} text-white`}
-            >
+            <DropdownToggle className={`${s.constructionDropdownToggle}`}>
               <span>{activeConstruction.label}</span>
               <i className="glyphicon glyphicon-chevron-down" />
             </DropdownToggle>

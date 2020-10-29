@@ -352,7 +352,7 @@ class Static extends React.Component {
                     </td>
                     <td>
                       <span>Jacob</span>
-                      <Badge color="warning" className="text-gray-dark">
+                      <Badge color="warning" className="text-gray-darker">
                         ALERT!
                       </Badge>
                     </td>

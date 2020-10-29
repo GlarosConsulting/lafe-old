@@ -40,7 +40,7 @@ class ProgressDemo extends React.Component {
           <span className="text-muted float-right">44%</span>
           <h6 className="m-0 mb-1">
             <span
-              className="circle bg-gray-dark text-warning"
+              className="circle bg-gray-darker text-warning"
               id="TooltipQuestion"
             >
               <i className="fa fa-question" />
@@ -52,7 +52,7 @@ class ProgressDemo extends React.Component {
           </h6>
           <Progress
             className={['progress-sm', 'm-0'].join(' ')}
-            color="gray-dark"
+            color="gray-darker"
             value="44"
           />
           <span className="help-block">last update: 2h ago</span>

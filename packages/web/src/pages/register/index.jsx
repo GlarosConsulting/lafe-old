@@ -132,7 +132,7 @@ class Register extends React.Component {
                 <InputGroup className="input-group-no-border">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="la la-user text-white" />
+                      <i className="la la-user" />
                     </InputGroupText>
                   </InputGroupAddon>
 
@@ -155,7 +155,7 @@ class Register extends React.Component {
                 <InputGroup className="input-group-no-border">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="la la-lock text-white" />
+                      <i className="la la-lock" />
                     </InputGroupText>
                   </InputGroupAddon>
 
@@ -177,7 +177,7 @@ class Register extends React.Component {
                 <InputGroup className="input-group-no-border">
                   <InputGroupAddon addonType="prepend">
                     <InputGroupText>
-                      <i className="la la-lock text-white" />
+                      <i className="la la-lock" />
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input

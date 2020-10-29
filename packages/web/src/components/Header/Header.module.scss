@@ -120,7 +120,7 @@
 
   input {
     font-size: 13px;
-    color: $white;
+    color: $text-color;
     background-color: transparentize($text-transparent, 0.1);
     border: none;
     padding: 0.6rem 0.85rem 0.6rem 0;
@@ -140,7 +140,7 @@
   display: block;
   width: 1px;
   margin: 10px 20px;
-  background: $white;
+  background: $text-color;
 }
 
 .navItem {
@@ -284,7 +284,7 @@
   left: -40px !important;
 
   h6 {
-    color: #fff;
+    color: $text-color;
   }
 
   &::after {
@@ -325,7 +325,7 @@
 }
 
 .accountCheck {
-  color: $text-color
+  color: $text-color;
 }
 
 .notificationsWrapper {

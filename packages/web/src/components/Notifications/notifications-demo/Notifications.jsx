@@ -72,7 +72,7 @@ class NotificationsDemo extends React.Component {
         <ListGroupItem className={s.listGroupItem}>
           <span className={[s.notificationIcon, 'thumb-sm'].join(' ')}>
             <span className="rounded bg-primary rounded-lg">
-              <i className="fa fa-facebook text-white" />
+              <i className="fa fa-facebook" />
             </span>
           </span>
           <p className="text-ellipsis m-0">
@@ -82,8 +82,8 @@ class NotificationsDemo extends React.Component {
         </ListGroupItem>
         <ListGroupItem className={s.listGroupItem}>
           <span className={[s.notificationIcon, 'thumb-sm'].join(' ')}>
-            <span className="circle circle-lg bg-gray-dark">
-              <i className="fa fa-circle-o text-white" />
+            <span className="circle circle-lg bg-gray-darker">
+              <i className="fa fa-circle-o" />
             </span>
           </span>
           <p className="text-ellipsis m-0">
